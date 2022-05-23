@@ -1,0 +1,16 @@
+{
+  "name": "lens-protocol",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ agustinbrazzola/lens-protocol",
+    "create-local": "graph create --node http://localhost:8020/ agustinbrazzola/lens-protocol",
+    "remove-local": "graph remove --node http://localhost:8020/ agustinbrazzola/lens-protocol",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 agustinbrazzola/lens-protocol"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.29.2",
+    "@graphprotocol/graph-ts": "0.26.0"
+  }
+}
