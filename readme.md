@@ -6,7 +6,7 @@ This project is Open Source and will remain that way. Feel free to use it.
 
 ## Schema 
 
-[This resource](https://docs.lens.xyz/docs/introduction) is useful tu understand what we are trying to accomplish.
+[This resource](https://docs.lens.xyz/docs/introduction) is useful to understand what we are trying to accomplish.
 
 Lens already has a centralized API and we are trying to reproduce the entities we see there.
 
