@@ -1,6 +1,36 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  previousAdmin: Bytes! # address
-  newAdmin: Bytes! # address
+type Dispatcher @entity {
+  profileId: ID! #tokenId
+  dispatcher: Bytes! # address
+}
+
+type Post @entity{
+  profileId: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  collectModule: Bytes! #collect address
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Comment @entity{
+  profileId: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  profileIdPointed: ID! #pointedId
+  pubIdPointed: ID! #pointed pub
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Mirror @entity{
+  profileId: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  profileIdPointed: ID! #pointedId
+  pubIdPointed: ID! #pointed pub
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
 }
