@@ -1,6 +1,6 @@
 # Lens Subgraph
 
-This is the on-going project for Lens-Protocol subgraph by DeveloperDAO. Championed by: @nazeeh and @agustinarg.eth.
+This is the on-going project for Lens-Protocol subgraph by DeveloperDAO. Championed by: [@nazeeh](https://twitter.com/Nazeeh21) and [@agustinarg.eth](https://twitter.com/PDog355).
 
 This project is Open Source and will remain that way. Feel free to use it.
 
