@@ -1,6 +1,8 @@
 type Dispatcher @entity {
   profileId: ID! #tokenId
   dispatcher: Bytes! # address
+  handle: String! # username
+  imageURI: String! # profile picture
 }
 
 type Post @entity{
