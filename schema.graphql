@@ -8,9 +8,11 @@ type Post @entity{
   pubId: ID! #publicationId
   contentURI: String! #content
   collectModule: Bytes! #collect address
+  collectModuleReturn: Bytes! #cm init data
   referenceModule: Bytes! #rm address
   referenceModuleReturn: Bytes! #abi encoded reference
   creationTime: Int! #timestamp
+  comments: [Comment!] @derivedFrom(field: "postPointed")
 }
 
 type Comment @entity{
@@ -19,9 +21,12 @@ type Comment @entity{
   contentURI: String! #content
   profileIdPointed: ID! #pointedId
   pubIdPointed: ID! #pointed pub
+  collectModule: Bytes! #cm address
+  collectModuleReturn: Bytes! #cm init data
   referenceModule: Bytes! #rm address
   referenceModuleReturn: Bytes! #abi encoded reference
   creationTime: Int! #timestamp
+  postPointed: Post!
 }
 
 type Mirror @entity{
@@ -32,5 +37,42 @@ type Mirror @entity{
   pubIdPointed: ID! #pointed pub
   referenceModule: Bytes! #rm address
   referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Profile @entity {
+  id: ID! #tokenId
+  creator: Bytes! #address which created the token with given Id
+  owner: Bytes! # address to which profile Id is minted
+  handle: String! #handle/username
+  imageURI: String! #profile picture
+  followNFTURI: String! #uri set on creation
+  createdOn: BigInt! #timestamp
+  followModule: Bytes! #fm address
+  followModuleReturnData: Bytes! #abi encoded reference
+  dispatcher: Bytes!
+}
+
+type ProfileCreatorWhitelisted @entity {
+  id: ID! #creator address
+  isWhitelisted: Boolean! #creator whitelisted/removed
+  creationTime: Int! #timestamp
+}
+
+type FollowModuleWhitelist @entity {
+  id: ID! #module address
+  isWhitelisted: Boolean! #module created/removed
+  creationTime: Int! #timestamp
+}
+
+type ReferenceModuleWhitelist @entity {
+  id: ID! #module address
+  isWhitelisted: Boolean! #module created/removed
+  creationTime: Int! #timestamp
+}
+
+type CollectModuleWhitelist @entity {
+  id: ID! #module address
+  isWhitelisted: Boolean! #module created/removed
   creationTime: Int! #timestamp
 }
