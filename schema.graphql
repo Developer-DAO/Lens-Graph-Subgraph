@@ -1,10 +1,10 @@
 type Dispatcher @entity {
-  profileId: ID! #tokenId
+  id: ID! #tokenId
   dispatcher: Bytes! # address
 }
 
 type Post @entity{
-  profileId: ID! #tokenId
+  id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
   collectModule: Bytes! #collect address
@@ -14,7 +14,7 @@ type Post @entity{
 }
 
 type Comment @entity{
-  profileId: ID! #tokenId
+  id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
   profileIdPointed: ID! #pointedId
@@ -25,7 +25,7 @@ type Comment @entity{
 }
 
 type Mirror @entity{
-  profileId: ID! #tokenId
+  id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
   profileIdPointed: ID! #pointedId
@@ -33,4 +33,22 @@ type Mirror @entity{
   referenceModule: Bytes! #rm address
   referenceModuleReturn: Bytes! #abi encoded reference
   creationTime: Int! #timestamp
+}
+
+type Follow @entity {
+  id: ID! #followerAccount
+  fromAccount: Account 
+  fromProfileSTR: String
+  toProfile: [Profile!]
+  timestamp: BigInt!
+}
+
+type FollowNFTTransferred @entity {
+  id: ID!
+  profileId: BigInt
+  followNFTID: BigInt
+  from: Bytes
+  to: Bytes
+  timestamp: BigInt
+  data: String
 }
