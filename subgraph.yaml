@@ -40,7 +40,7 @@ dataSources:
       abis:
         - name: TransparentUpgradeableProxy
           file: ./abis/lensproxy.json
-         - name: LensHub
+        - name: LensHub
           file: ./abis/LensHub.json
       eventHandlers:
       # To do
