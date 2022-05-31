@@ -1,47 +1,44 @@
-specVersion: 0.0.2
+specVersion: 0.0.5
 schema:
   file: ./schema.graphql
 dataSources:
-  - kind: ethereum
-    name: TransparentUpgradeableProxy
-    network: mumbai
-    source:
-      address: "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
-      abi: lensproxy
-      startBlock: 26267716
   - kind: ethereum
     name: LensHub
     network: mumbai
     source:
       address: "0x8C1f82e8AAD9399f52DcF224b77f33d5c1719241"
       abi: LensHub
+      startBlock: 25803825
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+      abis:
+        - name: LensHub
+          file: ./abis/LensHub.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+      file: ./src/mapping.ts
+  - kind: ethereum
+    name: TransparentUpgradeableProxy
+    network: mumbai
+    source:
+      address: "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
+      abi: lensproxy
       startBlock: 26267671
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
-        - Dispatcher
-        - Explore
-        - Follow
-        - Health
-        - Indexer
-        - Module
-        - NFTs
-        - Notification
-        - Profile
-        - Protocol Stats
-        - Publication
-        - Reporting
-        - Revenue
-        - Search
-        - Timeline
-        - General Information
+        - AdminChanged
       abis:
-        - name: TransparentUpgradeableProxy
+        - name: lensproxy
           file: ./abis/lensproxy.json
-        - name: LensHub
-          file: ./abis/LensHub.json
       eventHandlers:
-      # To do
-      file: ./src/mapping.ts
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+      file: ./src/mapping.ts  
