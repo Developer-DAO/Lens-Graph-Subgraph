@@ -11,7 +11,7 @@ import {
   BigDecimal
 } from "@graphprotocol/graph-ts";
 
-export class ExampleEntity extends Entity {
+export class Dispatcher extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -19,18 +19,18 @@ export class ExampleEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save ExampleEntity entity without an ID");
+    assert(id != null, "Cannot save Dispatcher entity without an ID");
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type ExampleEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type Dispatcher must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("ExampleEntity", id.toString(), this);
+      store.set("Dispatcher", id.toString(), this);
     }
   }
 
-  static load(id: string): ExampleEntity | null {
-    return changetype<ExampleEntity | null>(store.get("ExampleEntity", id));
+  static load(id: string): Dispatcher | null {
+    return changetype<Dispatcher | null>(store.get("Dispatcher", id));
   }
 
   get id(): string {
@@ -42,30 +42,288 @@ export class ExampleEntity extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get count(): BigInt {
-    let value = this.get("count");
-    return value!.toBigInt();
-  }
-
-  set count(value: BigInt) {
-    this.set("count", Value.fromBigInt(value));
-  }
-
-  get previousAdmin(): Bytes {
-    let value = this.get("previousAdmin");
+  get dispatcher(): Bytes {
+    let value = this.get("dispatcher");
     return value!.toBytes();
   }
 
-  set previousAdmin(value: Bytes) {
-    this.set("previousAdmin", Value.fromBytes(value));
+  set dispatcher(value: Bytes) {
+    this.set("dispatcher", Value.fromBytes(value));
+  }
+}
+
+export class Post extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
   }
 
-  get newAdmin(): Bytes {
-    let value = this.get("newAdmin");
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Post entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Post must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Post", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Post | null {
+    return changetype<Post | null>(store.get("Post", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get pubId(): string {
+    let value = this.get("pubId");
+    return value!.toString();
+  }
+
+  set pubId(value: string) {
+    this.set("pubId", Value.fromString(value));
+  }
+
+  get contentURI(): string {
+    let value = this.get("contentURI");
+    return value!.toString();
+  }
+
+  set contentURI(value: string) {
+    this.set("contentURI", Value.fromString(value));
+  }
+
+  get collectModule(): Bytes {
+    let value = this.get("collectModule");
     return value!.toBytes();
   }
 
-  set newAdmin(value: Bytes) {
-    this.set("newAdmin", Value.fromBytes(value));
+  set collectModule(value: Bytes) {
+    this.set("collectModule", Value.fromBytes(value));
+  }
+
+  get referenceModule(): Bytes {
+    let value = this.get("referenceModule");
+    return value!.toBytes();
+  }
+
+  set referenceModule(value: Bytes) {
+    this.set("referenceModule", Value.fromBytes(value));
+  }
+
+  get referenceModuleReturn(): Bytes {
+    let value = this.get("referenceModuleReturn");
+    return value!.toBytes();
+  }
+
+  set referenceModuleReturn(value: Bytes) {
+    this.set("referenceModuleReturn", Value.fromBytes(value));
+  }
+
+  get creationTime(): i32 {
+    let value = this.get("creationTime");
+    return value!.toI32();
+  }
+
+  set creationTime(value: i32) {
+    this.set("creationTime", Value.fromI32(value));
+  }
+}
+
+export class Comment extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Comment entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Comment must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Comment", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Comment | null {
+    return changetype<Comment | null>(store.get("Comment", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get pubId(): string {
+    let value = this.get("pubId");
+    return value!.toString();
+  }
+
+  set pubId(value: string) {
+    this.set("pubId", Value.fromString(value));
+  }
+
+  get contentURI(): string {
+    let value = this.get("contentURI");
+    return value!.toString();
+  }
+
+  set contentURI(value: string) {
+    this.set("contentURI", Value.fromString(value));
+  }
+
+  get profileIdPointed(): string {
+    let value = this.get("profileIdPointed");
+    return value!.toString();
+  }
+
+  set profileIdPointed(value: string) {
+    this.set("profileIdPointed", Value.fromString(value));
+  }
+
+  get pubIdPointed(): string {
+    let value = this.get("pubIdPointed");
+    return value!.toString();
+  }
+
+  set pubIdPointed(value: string) {
+    this.set("pubIdPointed", Value.fromString(value));
+  }
+
+  get referenceModule(): Bytes {
+    let value = this.get("referenceModule");
+    return value!.toBytes();
+  }
+
+  set referenceModule(value: Bytes) {
+    this.set("referenceModule", Value.fromBytes(value));
+  }
+
+  get referenceModuleReturn(): Bytes {
+    let value = this.get("referenceModuleReturn");
+    return value!.toBytes();
+  }
+
+  set referenceModuleReturn(value: Bytes) {
+    this.set("referenceModuleReturn", Value.fromBytes(value));
+  }
+
+  get creationTime(): i32 {
+    let value = this.get("creationTime");
+    return value!.toI32();
+  }
+
+  set creationTime(value: i32) {
+    this.set("creationTime", Value.fromI32(value));
+  }
+}
+
+export class Mirror extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Mirror entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Mirror must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Mirror", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Mirror | null {
+    return changetype<Mirror | null>(store.get("Mirror", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get pubId(): string {
+    let value = this.get("pubId");
+    return value!.toString();
+  }
+
+  set pubId(value: string) {
+    this.set("pubId", Value.fromString(value));
+  }
+
+  get contentURI(): string {
+    let value = this.get("contentURI");
+    return value!.toString();
+  }
+
+  set contentURI(value: string) {
+    this.set("contentURI", Value.fromString(value));
+  }
+
+  get profileIdPointed(): string {
+    let value = this.get("profileIdPointed");
+    return value!.toString();
+  }
+
+  set profileIdPointed(value: string) {
+    this.set("profileIdPointed", Value.fromString(value));
+  }
+
+  get pubIdPointed(): string {
+    let value = this.get("pubIdPointed");
+    return value!.toString();
+  }
+
+  set pubIdPointed(value: string) {
+    this.set("pubIdPointed", Value.fromString(value));
+  }
+
+  get referenceModule(): Bytes {
+    let value = this.get("referenceModule");
+    return value!.toBytes();
+  }
+
+  set referenceModule(value: Bytes) {
+    this.set("referenceModule", Value.fromBytes(value));
+  }
+
+  get referenceModuleReturn(): Bytes {
+    let value = this.get("referenceModuleReturn");
+    return value!.toBytes();
+  }
+
+  set referenceModuleReturn(value: Bytes) {
+    this.set("referenceModuleReturn", Value.fromBytes(value));
+  }
+
+  get creationTime(): i32 {
+    let value = this.get("creationTime");
+    return value!.toI32();
+  }
+
+  set creationTime(value: i32) {
+    this.set("creationTime", Value.fromI32(value));
   }
 }
