@@ -15,8 +15,6 @@ dataSources:
       language: wasm/assemblyscript
       entities:
         - Approval
-        - Profile
-        - Account
       abis:
         - name: LensHub
           file: ./abis/LensHub.json
