@@ -327,3 +327,79 @@ export class Mirror extends Entity {
     this.set("creationTime", Value.fromI32(value));
   }
 }
+
+export class Publication extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Publication entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Publication must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Publication", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Publication | null {
+    return changetype<Publication | null>(store.get("Publication", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get pubId(): string {
+    let value = this.get("pubId");
+    return value!.toString();
+  }
+
+  set pubId(value: string) {
+    this.set("pubId", Value.fromString(value));
+  }
+
+  get referenceModule(): Bytes {
+    let value = this.get("referenceModule");
+    return value!.toBytes();
+  }
+
+  set referenceModule(value: Bytes) {
+    this.set("referenceModule", Value.fromBytes(value));
+  }
+
+  get referenceModuleReturnData(): Bytes | null {
+    let value = this.get("referenceModuleReturnData");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set referenceModuleReturnData(value: Bytes | null) {
+    if (!value) {
+      this.unset("referenceModuleReturnData");
+    } else {
+      this.set("referenceModuleReturnData", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value!.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}

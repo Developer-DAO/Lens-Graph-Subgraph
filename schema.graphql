@@ -34,3 +34,11 @@ type Mirror @entity{
   referenceModuleReturn: Bytes! #abi encoded reference
   creationTime: Int! #timestamp
 }
+
+type Publication @entity {
+  id: ID!
+  pubId: ID!
+  referenceModule: Bytes!
+  referenceModuleReturnData: Bytes
+  timestamp: BigInt!
+}
