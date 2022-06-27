@@ -403,3 +403,139 @@ export class Publication extends Entity {
     this.set("timestamp", Value.fromBigInt(value));
   }
 }
+
+export class Profile extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Profile entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Profile must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Profile", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Profile | null {
+    return changetype<Profile | null>(store.get("Profile", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get name(): string | null {
+    let value = this.get("name");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set name(value: string | null) {
+    if (!value) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromString(<string>value));
+    }
+  }
+
+  get bio(): string | null {
+    let value = this.get("bio");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set bio(value: string | null) {
+    if (!value) {
+      this.unset("bio");
+    } else {
+      this.set("bio", Value.fromString(<string>value));
+    }
+  }
+
+  get followNftAddress(): string | null {
+    let value = this.get("followNftAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followNftAddress(value: string | null) {
+    if (!value) {
+      this.unset("followNftAddress");
+    } else {
+      this.set("followNftAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get metadata(): string | null {
+    let value = this.get("metadata");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set metadata(value: string | null) {
+    if (!value) {
+      this.unset("metadata");
+    } else {
+      this.set("metadata", Value.fromString(<string>value));
+    }
+  }
+
+  get handle(): string {
+    let value = this.get("handle");
+    return value!.toString();
+  }
+
+  set handle(value: string) {
+    this.set("handle", Value.fromString(value));
+  }
+
+  get onwnedBy(): string {
+    let value = this.get("onwnedBy");
+    return value!.toString();
+  }
+
+  set onwnedBy(value: string) {
+    this.set("onwnedBy", Value.fromString(value));
+  }
+
+  get isDefault(): boolean {
+    let value = this.get("isDefault");
+    return value!.toBoolean();
+  }
+
+  set isDefault(value: boolean) {
+    this.set("isDefault", Value.fromBoolean(value));
+  }
+
+  get isFollowedByMe(): boolean {
+    let value = this.get("isFollowedByMe");
+    return value!.toBoolean();
+  }
+
+  set isFollowedByMe(value: boolean) {
+    this.set("isFollowedByMe", Value.fromBoolean(value));
+  }
+}

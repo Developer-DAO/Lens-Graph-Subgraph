@@ -16,12 +16,15 @@ dataSources:
       entities:
         - Approval
         - Publication
+        - Profile
       abis:
         - name: LensHub
           file: ./abis/LensHub.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
+        - event: CollectNFTDeployed(indexed uint256,indexed uint256,indexed address,uint256)
+          handler: handleCollectNFTDeployed
       file: ./src/mapping.ts
   - kind: ethereum
     name: TransparentUpgradeableProxy
