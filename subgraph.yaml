@@ -17,6 +17,7 @@ dataSources:
         - Approval
         - Publication
         - Profile
+        - EIP712Signature
       abis:
         - name: LensHub
           file: ./abis/LensHub.json

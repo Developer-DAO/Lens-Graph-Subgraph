@@ -539,3 +539,71 @@ export class Profile extends Entity {
     this.set("isFollowedByMe", Value.fromBoolean(value));
   }
 }
+
+export class EIP712Signature extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save EIP712Signature entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type EIP712Signature must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("EIP712Signature", id.toString(), this);
+    }
+  }
+
+  static load(id: string): EIP712Signature | null {
+    return changetype<EIP712Signature | null>(store.get("EIP712Signature", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get v(): i32 {
+    let value = this.get("v");
+    return value!.toI32();
+  }
+
+  set v(value: i32) {
+    this.set("v", Value.fromI32(value));
+  }
+
+  get r(): i32 {
+    let value = this.get("r");
+    return value!.toI32();
+  }
+
+  set r(value: i32) {
+    this.set("r", Value.fromI32(value));
+  }
+
+  get s(): i32 {
+    let value = this.get("s");
+    return value!.toI32();
+  }
+
+  set s(value: i32) {
+    this.set("s", Value.fromI32(value));
+  }
+
+  get deadline(): i32 {
+    let value = this.get("deadline");
+    return value!.toI32();
+  }
+
+  set deadline(value: i32) {
+    this.set("deadline", Value.fromI32(value));
+  }
+}
