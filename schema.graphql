@@ -72,3 +72,13 @@ type MirrorWithSigData @entity {
   referenceModuleData: Bytes!
   sig: EIP712Signature!
 }
+
+type CreateProfileData @entity {
+  id: ID!
+  to: Bytes!
+  handle: String!
+  imageURI: String!
+  followModule: Bytes
+  followModuleData: Bytes
+  followNftURI: String
+}

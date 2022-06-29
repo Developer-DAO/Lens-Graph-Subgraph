@@ -695,3 +695,115 @@ export class MirrorWithSigData extends Entity {
     this.set("sig", Value.fromString(value));
   }
 }
+
+export class CreateProfileData extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save CreateProfileData entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type CreateProfileData must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("CreateProfileData", id.toString(), this);
+    }
+  }
+
+  static load(id: string): CreateProfileData | null {
+    return changetype<CreateProfileData | null>(
+      store.get("CreateProfileData", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get to(): Bytes {
+    let value = this.get("to");
+    return value!.toBytes();
+  }
+
+  set to(value: Bytes) {
+    this.set("to", Value.fromBytes(value));
+  }
+
+  get handle(): string {
+    let value = this.get("handle");
+    return value!.toString();
+  }
+
+  set handle(value: string) {
+    this.set("handle", Value.fromString(value));
+  }
+
+  get imageURI(): string {
+    let value = this.get("imageURI");
+    return value!.toString();
+  }
+
+  set imageURI(value: string) {
+    this.set("imageURI", Value.fromString(value));
+  }
+
+  get followModule(): Bytes | null {
+    let value = this.get("followModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set followModule(value: Bytes | null) {
+    if (!value) {
+      this.unset("followModule");
+    } else {
+      this.set("followModule", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get followModuleData(): Bytes | null {
+    let value = this.get("followModuleData");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set followModuleData(value: Bytes | null) {
+    if (!value) {
+      this.unset("followModuleData");
+    } else {
+      this.set("followModuleData", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get followNftURI(): string | null {
+    let value = this.get("followNftURI");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followNftURI(value: string | null) {
+    if (!value) {
+      this.unset("followNftURI");
+    } else {
+      this.set("followNftURI", Value.fromString(<string>value));
+    }
+  }
+}

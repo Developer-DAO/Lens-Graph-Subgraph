@@ -19,6 +19,7 @@ dataSources:
         - Profile
         - EIP712Signature
         - MirrorWithSigData
+        - CreateProfileData
       abis:
         - name: LensHub
           file: ./abis/LensHub.json
