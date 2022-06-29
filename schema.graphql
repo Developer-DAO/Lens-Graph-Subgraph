@@ -3,7 +3,7 @@ type Dispatcher @entity {
   dispatcher: Bytes! # address
 }
 
-type Post @entity{
+type Post @entity {
   id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
@@ -13,7 +13,7 @@ type Post @entity{
   creationTime: Int! #timestamp
 }
 
-type Comment @entity{
+type Comment @entity {
   id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
@@ -24,7 +24,7 @@ type Comment @entity{
   creationTime: Int! #timestamp
 }
 
-type Mirror @entity{
+type Mirror @entity {
   id: ID! #tokenId
   pubId: ID! #publicationId
   contentURI: String! #content
@@ -44,13 +44,111 @@ type Publication @entity {
 }
 
 type Profile @entity {
-id: ID!
-name: String
-bio: String
-followNftAddress: String
-metadata: String
-handle: String!
-onwnedBy: String!
-isDefault: Boolean!
-isFollowedByMe: Boolean!
+  id: ID!
+  name: String
+  bio: String
+  followNftAddress: String
+  metadata: String
+  handle: String!
+  onwnedBy: String!
+  isDefault: Boolean!
+  isFollowedByMe: Boolean!
+}
+
+query Followers($profileId: ID!) {
+  followers(request: { 
+                profileId: $profileId,
+              limit: 10
+             }) {
+       items {
+      wallet {
+        address
+        defaultProfile {
+          id
+          name
+          bio
+          attributes {
+            displayType
+            traitType
+            key
+            value
+          }
+          followNftAddress
+            metadata
+          isDefault
+          handle
+          picture {
+            ... on NftImage {
+              contractAddress
+              tokenId
+              uri
+              verified
+            }
+            ... on MediaSet {
+              original {
+                url
+                mimeType
+              }
+            }
+          }
+          coverPicture {
+            ... on NftImage {
+              contractAddress
+              tokenId
+              uri
+              verified
+            }
+            ... on MediaSet {
+              original {
+                url
+                mimeType
+              }
+            }
+          }
+          ownedBy
+          dispatcher {
+            address
+            canUseRelay
+          }
+          stats {
+            totalFollowers
+            totalFollowing
+            totalPosts
+            totalComments
+            totalMirrors
+            totalPublications
+            totalCollects
+          }
+          followModule {
+            ... on FeeFollowModuleSettings {
+              type
+              contractAddress
+              amount {
+                asset {
+                  name
+                  symbol
+                  decimals
+                  address
+                }
+                value
+              }
+              recipient
+            }
+            ... on ProfileFollowModuleSettings {
+             type
+            }
+            ... on RevertFollowModuleSettings {
+             type
+            }
+          }
+        }
+      }
+      totalAmountOfTimesFollowed
+    }
+    pageInfo {
+      prev
+      next
+      totalCount
+    }
+  }
 }
