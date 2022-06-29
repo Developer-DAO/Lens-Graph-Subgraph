@@ -607,3 +607,91 @@ export class EIP712Signature extends Entity {
     this.set("deadline", Value.fromI32(value));
   }
 }
+
+export class MirrorWithSigData extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save MirrorWithSigData entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type MirrorWithSigData must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("MirrorWithSigData", id.toString(), this);
+    }
+  }
+
+  static load(id: string): MirrorWithSigData | null {
+    return changetype<MirrorWithSigData | null>(
+      store.get("MirrorWithSigData", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get profileId(): string {
+    let value = this.get("profileId");
+    return value!.toString();
+  }
+
+  set profileId(value: string) {
+    this.set("profileId", Value.fromString(value));
+  }
+
+  get profileIdPointed(): i32 {
+    let value = this.get("profileIdPointed");
+    return value!.toI32();
+  }
+
+  set profileIdPointed(value: i32) {
+    this.set("profileIdPointed", Value.fromI32(value));
+  }
+
+  get pubIdPointed(): i32 {
+    let value = this.get("pubIdPointed");
+    return value!.toI32();
+  }
+
+  set pubIdPointed(value: i32) {
+    this.set("pubIdPointed", Value.fromI32(value));
+  }
+
+  get referenceModule(): Bytes {
+    let value = this.get("referenceModule");
+    return value!.toBytes();
+  }
+
+  set referenceModule(value: Bytes) {
+    this.set("referenceModule", Value.fromBytes(value));
+  }
+
+  get referenceModuleData(): Bytes {
+    let value = this.get("referenceModuleData");
+    return value!.toBytes();
+  }
+
+  set referenceModuleData(value: Bytes) {
+    this.set("referenceModuleData", Value.fromBytes(value));
+  }
+
+  get sig(): string {
+    let value = this.get("sig");
+    return value!.toString();
+  }
+
+  set sig(value: string) {
+    this.set("sig", Value.fromString(value));
+  }
+}

@@ -62,3 +62,13 @@ type EIP712Signature @entity {
   s: Int!
   deadline: Int!
 }
+
+type MirrorWithSigData @entity {
+  id: ID!
+  profileId: ID!
+  profileIdPointed: Int!
+  pubIdPointed: Int!
+  referenceModule: Bytes!
+  referenceModuleData: Bytes!
+  sig: EIP712Signature!
+}
