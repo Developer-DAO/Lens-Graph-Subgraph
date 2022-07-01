@@ -55,24 +55,6 @@ type Profile @entity {
   isFollowedByMe: Boolean!
 }
 
-type EIP712Signature @entity {
-  id: ID!
-  v: Int!
-  r: Int!
-  s: Int!
-  deadline: Int!
-}
-
-type MirrorWithSigData @entity {
-  id: ID!
-  profileId: ID!
-  profileIdPointed: Int!
-  pubIdPointed: Int!
-  referenceModule: Bytes!
-  referenceModuleData: Bytes!
-  sig: EIP712Signature!
-}
-
 type CreateProfileData @entity {
   id: ID!
   to: Bytes!
