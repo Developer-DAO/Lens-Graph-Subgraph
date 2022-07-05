@@ -1,0 +1,84 @@
+type Dispatcher @entity {
+  id: ID! #tokenId
+  dispatcher: Bytes! # address
+}
+
+type Post @entity {
+  id: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  collectModule: Bytes! #collect address
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Comment @entity {
+  id: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  profileIdPointed: ID! #pointedId
+  pubIdPointed: ID! #pointed pub
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Mirror @entity {
+  id: ID! #tokenId
+  pubId: ID! #publicationId
+  contentURI: String! #content
+  profileIdPointed: ID! #pointedId
+  pubIdPointed: ID! #pointed pub
+  referenceModule: Bytes! #rm address
+  referenceModuleReturn: Bytes! #abi encoded reference
+  creationTime: Int! #timestamp
+}
+
+type Publication @entity {
+  id: ID!
+  pubId: ID!
+  referenceModule: Bytes!
+  referenceModuleReturnData: Bytes
+  timestamp: BigInt!
+}
+
+type Profile @entity {
+  id: ID!
+  name: String
+  bio: String
+  followNftAddress: String
+  metadata: String
+  handle: String!
+  onwnedBy: String!
+  isDefault: Boolean!
+  isFollowedByMe: Boolean!
+}
+
+type CreateProfileData @entity {
+  id: ID!
+  to: Bytes!
+  handle: String!
+  imageURI: String!
+  followModule: Bytes
+  followModuleData: Bytes
+  followNftURI: String
+}
+
+type Follow @entity {
+  id: ID!
+  fromAccount: String
+  fromProfileSTR: String
+  toProfile: [Profile!]
+  timestamp: BigInt!
+}
+
+type FollowNFTTransferred @entity {
+  id: ID!
+  profileId: BigInt
+  followNFTID: BigInt
+  from: Bytes
+  to: Bytes
+  timestamp: BigInt
+  data: String
+}

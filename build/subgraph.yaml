@@ -1,0 +1,57 @@
+specVersion: 0.0.5
+schema:
+  file: schema.graphql
+dataSources:
+  - kind: ethereum
+    name: LensHub
+    network: mumbai
+    source:
+      address: "0x8C1f82e8AAD9399f52DcF224b77f33d5c1719241"
+      abi: LensHub
+      startBlock: 25803825
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Dispatcher
+        - Post
+        - Comment
+        - Mirror
+        - Approval
+        - Publication
+        - Profile
+        - CreateProfileData
+        - Follow
+        - FollowNFTTransferred
+      abis:
+        - name: LensHub
+          file: LensHub/abis/LensHub.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: CollectNFTDeployed(indexed uint256,indexed uint256,indexed address,uint256)
+          handler: handleCollectNFTDeployed
+        - event: FollowNFTTransferred(indexed uint256,indexed uint256,address,address,uint256)
+          handler: handleFollowNFTTransferred
+      file: LensHub/LensHub.wasm
+  - kind: ethereum
+    name: TransparentUpgradeableProxy
+    network: mumbai
+    source:
+      address: "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
+      abi: lensproxy
+      startBlock: 26267671
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+      abis:
+        - name: lensproxy
+          file: TransparentUpgradeableProxy/abis/lensproxy.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+      file: LensHub/LensHub.wasm
