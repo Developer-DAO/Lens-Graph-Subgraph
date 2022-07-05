@@ -64,3 +64,21 @@ type CreateProfileData @entity {
   followModuleData: Bytes
   followNftURI: String
 }
+
+type Follow @entity {
+  id: ID!
+  fromAccount: String
+  fromProfileSTR: String
+  toProfile: [Profile!]
+  timestamp: BigInt!
+}
+
+type FollowNFTTransferred @entity {
+  id: ID!
+  profileId: BigInt
+  followNFTID: BigInt
+  from: Bytes
+  to: Bytes
+  timestamp: BigInt
+  data: String
+}

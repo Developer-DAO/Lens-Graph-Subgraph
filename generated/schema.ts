@@ -540,162 +540,6 @@ export class Profile extends Entity {
   }
 }
 
-export class EIP712Signature extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save EIP712Signature entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type EIP712Signature must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("EIP712Signature", id.toString(), this);
-    }
-  }
-
-  static load(id: string): EIP712Signature | null {
-    return changetype<EIP712Signature | null>(store.get("EIP712Signature", id));
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get v(): i32 {
-    let value = this.get("v");
-    return value!.toI32();
-  }
-
-  set v(value: i32) {
-    this.set("v", Value.fromI32(value));
-  }
-
-  get r(): i32 {
-    let value = this.get("r");
-    return value!.toI32();
-  }
-
-  set r(value: i32) {
-    this.set("r", Value.fromI32(value));
-  }
-
-  get s(): i32 {
-    let value = this.get("s");
-    return value!.toI32();
-  }
-
-  set s(value: i32) {
-    this.set("s", Value.fromI32(value));
-  }
-
-  get deadline(): i32 {
-    let value = this.get("deadline");
-    return value!.toI32();
-  }
-
-  set deadline(value: i32) {
-    this.set("deadline", Value.fromI32(value));
-  }
-}
-
-export class MirrorWithSigData extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save MirrorWithSigData entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type MirrorWithSigData must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("MirrorWithSigData", id.toString(), this);
-    }
-  }
-
-  static load(id: string): MirrorWithSigData | null {
-    return changetype<MirrorWithSigData | null>(
-      store.get("MirrorWithSigData", id)
-    );
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get profileId(): string {
-    let value = this.get("profileId");
-    return value!.toString();
-  }
-
-  set profileId(value: string) {
-    this.set("profileId", Value.fromString(value));
-  }
-
-  get profileIdPointed(): i32 {
-    let value = this.get("profileIdPointed");
-    return value!.toI32();
-  }
-
-  set profileIdPointed(value: i32) {
-    this.set("profileIdPointed", Value.fromI32(value));
-  }
-
-  get pubIdPointed(): i32 {
-    let value = this.get("pubIdPointed");
-    return value!.toI32();
-  }
-
-  set pubIdPointed(value: i32) {
-    this.set("pubIdPointed", Value.fromI32(value));
-  }
-
-  get referenceModule(): Bytes {
-    let value = this.get("referenceModule");
-    return value!.toBytes();
-  }
-
-  set referenceModule(value: Bytes) {
-    this.set("referenceModule", Value.fromBytes(value));
-  }
-
-  get referenceModuleData(): Bytes {
-    let value = this.get("referenceModuleData");
-    return value!.toBytes();
-  }
-
-  set referenceModuleData(value: Bytes) {
-    this.set("referenceModuleData", Value.fromBytes(value));
-  }
-
-  get sig(): string {
-    let value = this.get("sig");
-    return value!.toString();
-  }
-
-  set sig(value: string) {
-    this.set("sig", Value.fromString(value));
-  }
-}
-
 export class CreateProfileData extends Entity {
   constructor(id: string) {
     super();
@@ -804,6 +648,234 @@ export class CreateProfileData extends Entity {
       this.unset("followNftURI");
     } else {
       this.set("followNftURI", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class Follow extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Follow entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Follow must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Follow", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Follow | null {
+    return changetype<Follow | null>(store.get("Follow", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get fromAccount(): string | null {
+    let value = this.get("fromAccount");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fromAccount(value: string | null) {
+    if (!value) {
+      this.unset("fromAccount");
+    } else {
+      this.set("fromAccount", Value.fromString(<string>value));
+    }
+  }
+
+  get fromProfileSTR(): string | null {
+    let value = this.get("fromProfileSTR");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set fromProfileSTR(value: string | null) {
+    if (!value) {
+      this.unset("fromProfileSTR");
+    } else {
+      this.set("fromProfileSTR", Value.fromString(<string>value));
+    }
+  }
+
+  get toProfile(): Array<string> | null {
+    let value = this.get("toProfile");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set toProfile(value: Array<string> | null) {
+    if (!value) {
+      this.unset("toProfile");
+    } else {
+      this.set("toProfile", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get timestamp(): BigInt {
+    let value = this.get("timestamp");
+    return value!.toBigInt();
+  }
+
+  set timestamp(value: BigInt) {
+    this.set("timestamp", Value.fromBigInt(value));
+  }
+}
+
+export class FollowNFTTransferred extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save FollowNFTTransferred entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type FollowNFTTransferred must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("FollowNFTTransferred", id.toString(), this);
+    }
+  }
+
+  static load(id: string): FollowNFTTransferred | null {
+    return changetype<FollowNFTTransferred | null>(
+      store.get("FollowNFTTransferred", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get profileId(): BigInt | null {
+    let value = this.get("profileId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set profileId(value: BigInt | null) {
+    if (!value) {
+      this.unset("profileId");
+    } else {
+      this.set("profileId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get followNFTID(): BigInt | null {
+    let value = this.get("followNFTID");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set followNFTID(value: BigInt | null) {
+    if (!value) {
+      this.unset("followNFTID");
+    } else {
+      this.set("followNFTID", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get from(): Bytes | null {
+    let value = this.get("from");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set from(value: Bytes | null) {
+    if (!value) {
+      this.unset("from");
+    } else {
+      this.set("from", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get to(): Bytes | null {
+    let value = this.get("to");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set to(value: Bytes | null) {
+    if (!value) {
+      this.unset("to");
+    } else {
+      this.set("to", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get timestamp(): BigInt | null {
+    let value = this.get("timestamp");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set timestamp(value: BigInt | null) {
+    if (!value) {
+      this.unset("timestamp");
+    } else {
+      this.set("timestamp", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get data(): string | null {
+    let value = this.get("data");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set data(value: string | null) {
+    if (!value) {
+      this.unset("data");
+    } else {
+      this.set("data", Value.fromString(<string>value));
     }
   }
 }

@@ -14,12 +14,16 @@ dataSources:
       apiVersion: 0.0.5
       language: wasm/assemblyscript
       entities:
+        - Dispatcher
+        - Post
+        - Comment
+        - Mirror
         - Approval
         - Publication
         - Profile
-        - EIP712Signature
-        - MirrorWithSigData
         - CreateProfileData
+        - Follow
+        - FollowNFTTransferred
       abis:
         - name: LensHub
           file: ./abis/LensHub.json
@@ -28,6 +32,8 @@ dataSources:
           handler: handleApproval
         - event: CollectNFTDeployed(indexed uint256,indexed uint256,indexed address,uint256)
           handler: handleCollectNFTDeployed
+        - event: FollowNFTTransferred(indexed uint256,indexed uint256,address,address,uint256)
+          handler: handleFollowNFTTransferred
       file: ./src/mapping.ts
   - kind: ethereum
     name: TransparentUpgradeableProxy
