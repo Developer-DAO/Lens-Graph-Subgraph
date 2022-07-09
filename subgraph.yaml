@@ -4,9 +4,9 @@ schema:
 dataSources:
   - kind: ethereum
     name: LensHub
-    network: mumbai
+    network: matic
     source:
-      address: "0x8C1f82e8AAD9399f52DcF224b77f33d5c1719241"
+      address: "0x20f4D7DdeE23029048C53B42dc73A02De19F1c9E"
       abi: LensHub
       startBlock: 25803825
     mapping:
@@ -34,12 +34,14 @@ dataSources:
           handler: handleCollectNFTDeployed
         - event: FollowNFTTransferred(indexed uint256,indexed uint256,address,address,uint256)
           handler: handleFollowNFTTransferred
+        - event: ProfileCreated(indexed uint256,indexed address,indexed address,string,string,address,bytes,string,uint256)
+          handler: handleProfileCreated
       file: ./src/mapping.ts
   - kind: ethereum
     name: TransparentUpgradeableProxy
-    network: mumbai
+    network: matic
     source:
-      address: "0x60Ae865ee4C725cd04353b5AAb364553f56ceF82"
+      address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
       abi: lensproxy
       startBlock: 26267671
     mapping:
