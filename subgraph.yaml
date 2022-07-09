@@ -27,21 +27,28 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/lens-hub.ts
-  # - kind: ethereum
-  #   name: Lensproxy
-  #   network: matic
-  #   source:
-  #     address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
-  #     abi: lensproxy
-  #     startBlock: 26267671
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.5
-  #     language: wasm/assemblyscript
-  #     entities:
-
-  #     abis:
-  #       - name: lensproxy
-  #         file: ./abis/lensproxy.json
-  #     eventHandlers:
-  #     file: ./src/mapping.ts  
+  - kind: ethereum
+    name: TransparentUpgradeableProxy
+    network: matic
+    source:
+      address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
+      abi: TransparentUpgradeableProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
+      abis:
+        - name: TransparentUpgradeableProxy
+          file: ./abis/TransparentUpgradeableProxy.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: ./src/transparent-upgradeable-proxy.ts
