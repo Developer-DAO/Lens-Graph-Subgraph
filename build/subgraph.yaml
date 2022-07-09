@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum
     name: LensHub
@@ -18,7 +18,7 @@ dataSources:
         - Transfer
       abis:
         - name: LensHub
-          file: ./abis/LensHub.json
+          file: LensHub/abis/LensHub.json
       eventHandlers:
         - event: Approval(indexed address,indexed address,indexed uint256)
           handler: handleApproval
@@ -26,22 +26,4 @@ dataSources:
           handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/lens-hub.ts
-  # - kind: ethereum
-  #   name: Lensproxy
-  #   network: matic
-  #   source:
-  #     address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
-  #     abi: lensproxy
-  #     startBlock: 26267671
-  #   mapping:
-  #     kind: ethereum/events
-  #     apiVersion: 0.0.5
-  #     language: wasm/assemblyscript
-  #     entities:
-
-  #     abis:
-  #       - name: lensproxy
-  #         file: ./abis/lensproxy.json
-  #     eventHandlers:
-  #     file: ./src/mapping.ts  
+      file: LensHub/LensHub.wasm
