@@ -16,6 +16,7 @@ dataSources:
         - Approval
         - ApprovalForAll
         - Transfer
+        - Profile
       abis:
         - name: LensHub
           file: LensHub/abis/LensHub.json
@@ -26,6 +27,9 @@ dataSources:
           handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
+        - event: ProfileCreated(indexed uint256,indexed address,indexed
+            address,string,string,address,bytes,string,uint256)
+          handler: handleProfileCreated
       file: LensHub/LensHub.wasm
   - kind: ethereum
     name: TransparentUpgradeableProxy

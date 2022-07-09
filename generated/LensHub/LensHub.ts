@@ -88,209 +88,1047 @@ export class Transfer__Params {
   }
 }
 
-export class LensHub__collectWithSigInputVarsStruct extends ethereum.Tuple {
-  get collector(): Address {
-    return this[0].toAddress();
+export class BaseInitialized extends ethereum.Event {
+  get params(): BaseInitialized__Params {
+    return new BaseInitialized__Params(this);
+  }
+}
+
+export class BaseInitialized__Params {
+  _event: BaseInitialized;
+
+  constructor(event: BaseInitialized) {
+    this._event = event;
+  }
+
+  get name(): string {
+    return this._event.parameters[0].value.toString();
+  }
+
+  get symbol(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class CollectModuleWhitelisted extends ethereum.Event {
+  get params(): CollectModuleWhitelisted__Params {
+    return new CollectModuleWhitelisted__Params(this);
+  }
+}
+
+export class CollectModuleWhitelisted__Params {
+  _event: CollectModuleWhitelisted;
+
+  constructor(event: CollectModuleWhitelisted) {
+    this._event = event;
+  }
+
+  get collectModule(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get whitelisted(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class CollectNFTDeployed extends ethereum.Event {
+  get params(): CollectNFTDeployed__Params {
+    return new CollectNFTDeployed__Params(this);
+  }
+}
+
+export class CollectNFTDeployed__Params {
+  _event: CollectNFTDeployed;
+
+  constructor(event: CollectNFTDeployed) {
+    this._event = event;
   }
 
   get profileId(): BigInt {
-    return this[1].toBigInt();
+    return this._event.parameters[0].value.toBigInt();
   }
 
   get pubId(): BigInt {
-    return this[2].toBigInt();
+    return this._event.parameters[1].value.toBigInt();
   }
 
-  get data(): Bytes {
-    return this[3].toBytes();
+  get collectNFT(): Address {
+    return this._event.parameters[2].value.toAddress();
   }
 
-  get sig(): LensHub__collectWithSigInputVarsSigStruct {
-    return changetype<LensHub__collectWithSigInputVarsSigStruct>(
-      this[4].toTuple()
-    );
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
-export class LensHub__collectWithSigInputVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
-  }
-
-  get r(): Bytes {
-    return this[1].toBytes();
-  }
-
-  get s(): Bytes {
-    return this[2].toBytes();
-  }
-
-  get deadline(): BigInt {
-    return this[3].toBigInt();
+export class CollectNFTInitialized extends ethereum.Event {
+  get params(): CollectNFTInitialized__Params {
+    return new CollectNFTInitialized__Params(this);
   }
 }
 
-export class LensHub__commentInputVarsStruct extends ethereum.Tuple {
+export class CollectNFTInitialized__Params {
+  _event: CollectNFTInitialized;
+
+  constructor(event: CollectNFTInitialized) {
+    this._event = event;
+  }
+
   get profileId(): BigInt {
-    return this[0].toBigInt();
+    return this._event.parameters[0].value.toBigInt();
   }
 
-  get contentURI(): string {
-    return this[1].toString();
+  get pubId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 
-  get profileIdPointed(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get pubIdPointed(): BigInt {
-    return this[3].toBigInt();
-  }
-
-  get referenceModuleData(): Bytes {
-    return this[4].toBytes();
-  }
-
-  get collectModule(): Address {
-    return this[5].toAddress();
-  }
-
-  get collectModuleInitData(): Bytes {
-    return this[6].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[7].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[8].toBytes();
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
-export class LensHub__commentWithSigInputVarsStruct extends ethereum.Tuple {
+export class CollectNFTTransferred extends ethereum.Event {
+  get params(): CollectNFTTransferred__Params {
+    return new CollectNFTTransferred__Params(this);
+  }
+}
+
+export class CollectNFTTransferred__Params {
+  _event: CollectNFTTransferred;
+
+  constructor(event: CollectNFTTransferred) {
+    this._event = event;
+  }
+
   get profileId(): BigInt {
-    return this[0].toBigInt();
+    return this._event.parameters[0].value.toBigInt();
   }
 
-  get contentURI(): string {
-    return this[1].toString();
+  get pubId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 
-  get profileIdPointed(): BigInt {
-    return this[2].toBigInt();
+  get collectNFTId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 
-  get pubIdPointed(): BigInt {
-    return this[3].toBigInt();
+  get from(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 
-  get referenceModuleData(): Bytes {
-    return this[4].toBytes();
-  }
-
-  get collectModule(): Address {
-    return this[5].toAddress();
-  }
-
-  get collectModuleInitData(): Bytes {
-    return this[6].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[7].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[8].toBytes();
-  }
-
-  get sig(): LensHub__commentWithSigInputVarsSigStruct {
-    return changetype<LensHub__commentWithSigInputVarsSigStruct>(
-      this[9].toTuple()
-    );
-  }
-}
-
-export class LensHub__commentWithSigInputVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
-  }
-
-  get r(): Bytes {
-    return this[1].toBytes();
-  }
-
-  get s(): Bytes {
-    return this[2].toBytes();
-  }
-
-  get deadline(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class LensHub__createProfileInputVarsStruct extends ethereum.Tuple {
   get to(): Address {
-    return this[0].toAddress();
+    return this._event.parameters[4].value.toAddress();
   }
 
-  get handle(): string {
-    return this[1].toString();
+  get timestamp(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+}
+
+export class DefaultProfileSet extends ethereum.Event {
+  get params(): DefaultProfileSet__Params {
+    return new DefaultProfileSet__Params(this);
+  }
+}
+
+export class DefaultProfileSet__Params {
+  _event: DefaultProfileSet;
+
+  constructor(event: DefaultProfileSet) {
+    this._event = event;
   }
 
-  get imageURI(): string {
-    return this[2].toString();
+  get wallet(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class FollowNFTTransferred extends ethereum.Event {
+  get params(): FollowNFTTransferred__Params {
+    return new FollowNFTTransferred__Params(this);
+  }
+}
+
+export class FollowNFTTransferred__Params {
+  _event: FollowNFTTransferred;
+
+  constructor(event: FollowNFTTransferred) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get followNFTId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get from(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get to(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class Collected extends ethereum.Event {
+  get params(): Collected__Params {
+    return new Collected__Params(this);
+  }
+}
+
+export class Collected__Params {
+  _event: Collected;
+
+  constructor(event: Collected) {
+    this._event = event;
+  }
+
+  get collector(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get pubId(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get rootProfileId(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get rootPubId(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+}
+
+export class CommentCreated extends ethereum.Event {
+  get params(): CommentCreated__Params {
+    return new CommentCreated__Params(this);
+  }
+}
+
+export class CommentCreated__Params {
+  _event: CommentCreated;
+
+  constructor(event: CommentCreated) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get pubId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get contentURI(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get profileIdPointed(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get pubIdPointed(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+
+  get referenceModuleData(): Bytes {
+    return this._event.parameters[5].value.toBytes();
+  }
+
+  get collectModule(): Address {
+    return this._event.parameters[6].value.toAddress();
+  }
+
+  get collectModuleReturnData(): Bytes {
+    return this._event.parameters[7].value.toBytes();
+  }
+
+  get referenceModule(): Address {
+    return this._event.parameters[8].value.toAddress();
+  }
+
+  get referenceModuleReturnData(): Bytes {
+    return this._event.parameters[9].value.toBytes();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[10].value.toBigInt();
+  }
+}
+
+export class DispatcherSet extends ethereum.Event {
+  get params(): DispatcherSet__Params {
+    return new DispatcherSet__Params(this);
+  }
+}
+
+export class DispatcherSet__Params {
+  _event: DispatcherSet;
+
+  constructor(event: DispatcherSet) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get dispatcher(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class EmergencyAdminSet extends ethereum.Event {
+  get params(): EmergencyAdminSet__Params {
+    return new EmergencyAdminSet__Params(this);
+  }
+}
+
+export class EmergencyAdminSet__Params {
+  _event: EmergencyAdminSet;
+
+  constructor(event: EmergencyAdminSet) {
+    this._event = event;
+  }
+
+  get caller(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get oldEmergencyAdmin(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get newEmergencyAdmin(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class FeeModuleBaseConstructed extends ethereum.Event {
+  get params(): FeeModuleBaseConstructed__Params {
+    return new FeeModuleBaseConstructed__Params(this);
+  }
+}
+
+export class FeeModuleBaseConstructed__Params {
+  _event: FeeModuleBaseConstructed;
+
+  constructor(event: FeeModuleBaseConstructed) {
+    this._event = event;
+  }
+
+  get moduleGlobals(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class FollowModuleSet extends ethereum.Event {
+  get params(): FollowModuleSet__Params {
+    return new FollowModuleSet__Params(this);
+  }
+}
+
+export class FollowModuleSet__Params {
+  _event: FollowModuleSet;
+
+  constructor(event: FollowModuleSet) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
   get followModule(): Address {
-    return this[3].toAddress();
+    return this._event.parameters[1].value.toAddress();
   }
 
-  get followModuleInitData(): Bytes {
-    return this[4].toBytes();
+  get followModuleReturnData(): Bytes {
+    return this._event.parameters[2].value.toBytes();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class FollowModuleWhitelisted extends ethereum.Event {
+  get params(): FollowModuleWhitelisted__Params {
+    return new FollowModuleWhitelisted__Params(this);
+  }
+}
+
+export class FollowModuleWhitelisted__Params {
+  _event: FollowModuleWhitelisted;
+
+  constructor(event: FollowModuleWhitelisted) {
+    this._event = event;
+  }
+
+  get followModule(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get whitelisted(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class FollowNFTDelegatedPowerChanged extends ethereum.Event {
+  get params(): FollowNFTDelegatedPowerChanged__Params {
+    return new FollowNFTDelegatedPowerChanged__Params(this);
+  }
+}
+
+export class FollowNFTDelegatedPowerChanged__Params {
+  _event: FollowNFTDelegatedPowerChanged;
+
+  constructor(event: FollowNFTDelegatedPowerChanged) {
+    this._event = event;
+  }
+
+  get delegate(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newPower(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class FollowNFTDeployed extends ethereum.Event {
+  get params(): FollowNFTDeployed__Params {
+    return new FollowNFTDeployed__Params(this);
+  }
+}
+
+export class FollowNFTDeployed__Params {
+  _event: FollowNFTDeployed;
+
+  constructor(event: FollowNFTDeployed) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get followNFT(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class FollowNFTInitialized extends ethereum.Event {
+  get params(): FollowNFTInitialized__Params {
+    return new FollowNFTInitialized__Params(this);
+  }
+}
+
+export class FollowNFTInitialized__Params {
+  _event: FollowNFTInitialized;
+
+  constructor(event: FollowNFTInitialized) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class FollowNFTTransferred1 extends ethereum.Event {
+  get params(): FollowNFTTransferred1__Params {
+    return new FollowNFTTransferred1__Params(this);
+  }
+}
+
+export class FollowNFTTransferred1__Params {
+  _event: FollowNFTTransferred1;
+
+  constructor(event: FollowNFTTransferred1) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get followNFTId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get from(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get to(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class FollowNFTURISet extends ethereum.Event {
+  get params(): FollowNFTURISet__Params {
+    return new FollowNFTURISet__Params(this);
+  }
+}
+
+export class FollowNFTURISet__Params {
+  _event: FollowNFTURISet;
+
+  constructor(event: FollowNFTURISet) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
   get followNFTURI(): string {
-    return this[5].toString();
+    return this._event.parameters[1].value.toString();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
   }
 }
 
-export class LensHub__followWithSigInputVarsStruct extends ethereum.Tuple {
+export class Followed extends ethereum.Event {
+  get params(): Followed__Params {
+    return new Followed__Params(this);
+  }
+}
+
+export class Followed__Params {
+  _event: Followed;
+
+  constructor(event: Followed) {
+    this._event = event;
+  }
+
   get follower(): Address {
-    return this[0].toAddress();
+    return this._event.parameters[0].value.toAddress();
   }
 
   get profileIds(): Array<BigInt> {
-    return this[1].toBigIntArray();
+    return this._event.parameters[1].value.toBigIntArray();
   }
 
-  get datas(): Array<Bytes> {
-    return this[2].toBytesArray();
+  get followModuleDatas(): Array<Bytes> {
+    return this._event.parameters[2].value.toBytesArray();
   }
 
-  get sig(): LensHub__followWithSigInputVarsSigStruct {
-    return changetype<LensHub__followWithSigInputVarsSigStruct>(
-      this[3].toTuple()
-    );
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
-export class LensHub__followWithSigInputVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
+export class FollowsApproved extends ethereum.Event {
+  get params(): FollowsApproved__Params {
+    return new FollowsApproved__Params(this);
+  }
+}
+
+export class FollowsApproved__Params {
+  _event: FollowsApproved;
+
+  constructor(event: FollowsApproved) {
+    this._event = event;
   }
 
-  get r(): Bytes {
-    return this[1].toBytes();
+  get owner(): Address {
+    return this._event.parameters[0].value.toAddress();
   }
 
-  get s(): Bytes {
-    return this[2].toBytes();
+  get profileId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
   }
 
-  get deadline(): BigInt {
-    return this[3].toBigInt();
+  get addresses(): Array<Address> {
+    return this._event.parameters[2].value.toAddressArray();
+  }
+
+  get approved(): Array<boolean> {
+    return this._event.parameters[3].value.toBooleanArray();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[4].value.toBigInt();
+  }
+}
+
+export class GovernanceSet extends ethereum.Event {
+  get params(): GovernanceSet__Params {
+    return new GovernanceSet__Params(this);
+  }
+}
+
+export class GovernanceSet__Params {
+  _event: GovernanceSet;
+
+  constructor(event: GovernanceSet) {
+    this._event = event;
+  }
+
+  get caller(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get prevGovernance(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get newGovernance(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class MirrorCreated extends ethereum.Event {
+  get params(): MirrorCreated__Params {
+    return new MirrorCreated__Params(this);
+  }
+}
+
+export class MirrorCreated__Params {
+  _event: MirrorCreated;
+
+  constructor(event: MirrorCreated) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get pubId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get profileIdPointed(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+
+  get pubIdPointed(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+
+  get referenceModuleData(): Bytes {
+    return this._event.parameters[4].value.toBytes();
+  }
+
+  get referenceModule(): Address {
+    return this._event.parameters[5].value.toAddress();
+  }
+
+  get referenceModuleReturnData(): Bytes {
+    return this._event.parameters[6].value.toBytes();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
+  }
+}
+
+export class ModuleBaseConstructed extends ethereum.Event {
+  get params(): ModuleBaseConstructed__Params {
+    return new ModuleBaseConstructed__Params(this);
+  }
+}
+
+export class ModuleBaseConstructed__Params {
+  _event: ModuleBaseConstructed;
+
+  constructor(event: ModuleBaseConstructed) {
+    this._event = event;
+  }
+
+  get hub(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+}
+
+export class ModuleGlobalsCurrencyWhitelisted extends ethereum.Event {
+  get params(): ModuleGlobalsCurrencyWhitelisted__Params {
+    return new ModuleGlobalsCurrencyWhitelisted__Params(this);
+  }
+}
+
+export class ModuleGlobalsCurrencyWhitelisted__Params {
+  _event: ModuleGlobalsCurrencyWhitelisted;
+
+  constructor(event: ModuleGlobalsCurrencyWhitelisted) {
+    this._event = event;
+  }
+
+  get currency(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get prevWhitelisted(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get whitelisted(): boolean {
+    return this._event.parameters[2].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
+  }
+}
+
+export class ModuleGlobalsGovernanceSet extends ethereum.Event {
+  get params(): ModuleGlobalsGovernanceSet__Params {
+    return new ModuleGlobalsGovernanceSet__Params(this);
+  }
+}
+
+export class ModuleGlobalsGovernanceSet__Params {
+  _event: ModuleGlobalsGovernanceSet;
+
+  constructor(event: ModuleGlobalsGovernanceSet) {
+    this._event = event;
+  }
+
+  get prevGovernance(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newGovernance(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ModuleGlobalsTreasuryFeeSet extends ethereum.Event {
+  get params(): ModuleGlobalsTreasuryFeeSet__Params {
+    return new ModuleGlobalsTreasuryFeeSet__Params(this);
+  }
+}
+
+export class ModuleGlobalsTreasuryFeeSet__Params {
+  _event: ModuleGlobalsTreasuryFeeSet;
+
+  constructor(event: ModuleGlobalsTreasuryFeeSet) {
+    this._event = event;
+  }
+
+  get prevTreasuryFee(): i32 {
+    return this._event.parameters[0].value.toI32();
+  }
+
+  get newTreasuryFee(): i32 {
+    return this._event.parameters[1].value.toI32();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ModuleGlobalsTreasurySet extends ethereum.Event {
+  get params(): ModuleGlobalsTreasurySet__Params {
+    return new ModuleGlobalsTreasurySet__Params(this);
+  }
+}
+
+export class ModuleGlobalsTreasurySet__Params {
+  _event: ModuleGlobalsTreasurySet;
+
+  constructor(event: ModuleGlobalsTreasurySet) {
+    this._event = event;
+  }
+
+  get prevTreasury(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get newTreasury(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class PostCreated extends ethereum.Event {
+  get params(): PostCreated__Params {
+    return new PostCreated__Params(this);
+  }
+}
+
+export class PostCreated__Params {
+  _event: PostCreated;
+
+  constructor(event: PostCreated) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get pubId(): BigInt {
+    return this._event.parameters[1].value.toBigInt();
+  }
+
+  get contentURI(): string {
+    return this._event.parameters[2].value.toString();
+  }
+
+  get collectModule(): Address {
+    return this._event.parameters[3].value.toAddress();
+  }
+
+  get collectModuleReturnData(): Bytes {
+    return this._event.parameters[4].value.toBytes();
+  }
+
+  get referenceModule(): Address {
+    return this._event.parameters[5].value.toAddress();
+  }
+
+  get referenceModuleReturnData(): Bytes {
+    return this._event.parameters[6].value.toBytes();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[7].value.toBigInt();
+  }
+}
+
+export class ProfileCreated extends ethereum.Event {
+  get params(): ProfileCreated__Params {
+    return new ProfileCreated__Params(this);
+  }
+}
+
+export class ProfileCreated__Params {
+  _event: ProfileCreated;
+
+  constructor(event: ProfileCreated) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get creator(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get to(): Address {
+    return this._event.parameters[2].value.toAddress();
+  }
+
+  get handle(): string {
+    return this._event.parameters[3].value.toString();
+  }
+
+  get imageURI(): string {
+    return this._event.parameters[4].value.toString();
+  }
+
+  get followModule(): Address {
+    return this._event.parameters[5].value.toAddress();
+  }
+
+  get followModuleReturnData(): Bytes {
+    return this._event.parameters[6].value.toBytes();
+  }
+
+  get followNFTURI(): string {
+    return this._event.parameters[7].value.toString();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[8].value.toBigInt();
+  }
+}
+
+export class ProfileCreatorWhitelisted extends ethereum.Event {
+  get params(): ProfileCreatorWhitelisted__Params {
+    return new ProfileCreatorWhitelisted__Params(this);
+  }
+}
+
+export class ProfileCreatorWhitelisted__Params {
+  _event: ProfileCreatorWhitelisted;
+
+  constructor(event: ProfileCreatorWhitelisted) {
+    this._event = event;
+  }
+
+  get profileCreator(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get whitelisted(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ProfileImageURISet extends ethereum.Event {
+  get params(): ProfileImageURISet__Params {
+    return new ProfileImageURISet__Params(this);
+  }
+}
+
+export class ProfileImageURISet__Params {
+  _event: ProfileImageURISet;
+
+  constructor(event: ProfileImageURISet) {
+    this._event = event;
+  }
+
+  get profileId(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get imageURI(): string {
+    return this._event.parameters[1].value.toString();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class ReferenceModuleWhitelisted extends ethereum.Event {
+  get params(): ReferenceModuleWhitelisted__Params {
+    return new ReferenceModuleWhitelisted__Params(this);
+  }
+}
+
+export class ReferenceModuleWhitelisted__Params {
+  _event: ReferenceModuleWhitelisted;
+
+  constructor(event: ReferenceModuleWhitelisted) {
+    this._event = event;
+  }
+
+  get referenceModule(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get whitelisted(): boolean {
+    return this._event.parameters[1].value.toBoolean();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[2].value.toBigInt();
+  }
+}
+
+export class StateSet extends ethereum.Event {
+  get params(): StateSet__Params {
+    return new StateSet__Params(this);
+  }
+}
+
+export class StateSet__Params {
+  _event: StateSet;
+
+  constructor(event: StateSet) {
+    this._event = event;
+  }
+
+  get caller(): Address {
+    return this._event.parameters[0].value.toAddress();
+  }
+
+  get prevState(): i32 {
+    return this._event.parameters[1].value.toI32();
+  }
+
+  get newState(): i32 {
+    return this._event.parameters[2].value.toI32();
+  }
+
+  get timestamp(): BigInt {
+    return this._event.parameters[3].value.toBigInt();
   }
 }
 
@@ -371,158 +1209,6 @@ export class LensHub__getPubPointerResult {
   }
 }
 
-export class LensHub__mirrorInputVarsStruct extends ethereum.Tuple {
-  get profileId(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get profileIdPointed(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get pubIdPointed(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get referenceModuleData(): Bytes {
-    return this[3].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[4].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
-  }
-}
-
-export class LensHub__mirrorWithSigInputVarsStruct extends ethereum.Tuple {
-  get profileId(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get profileIdPointed(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get pubIdPointed(): BigInt {
-    return this[2].toBigInt();
-  }
-
-  get referenceModuleData(): Bytes {
-    return this[3].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[4].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
-  }
-
-  get sig(): LensHub__mirrorWithSigInputVarsSigStruct {
-    return changetype<LensHub__mirrorWithSigInputVarsSigStruct>(
-      this[6].toTuple()
-    );
-  }
-}
-
-export class LensHub__mirrorWithSigInputVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
-  }
-
-  get r(): Bytes {
-    return this[1].toBytes();
-  }
-
-  get s(): Bytes {
-    return this[2].toBytes();
-  }
-
-  get deadline(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
-export class LensHub__postInputVarsStruct extends ethereum.Tuple {
-  get profileId(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get contentURI(): string {
-    return this[1].toString();
-  }
-
-  get collectModule(): Address {
-    return this[2].toAddress();
-  }
-
-  get collectModuleInitData(): Bytes {
-    return this[3].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[4].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
-  }
-}
-
-export class LensHub__postWithSigInputVarsStruct extends ethereum.Tuple {
-  get profileId(): BigInt {
-    return this[0].toBigInt();
-  }
-
-  get contentURI(): string {
-    return this[1].toString();
-  }
-
-  get collectModule(): Address {
-    return this[2].toAddress();
-  }
-
-  get collectModuleInitData(): Bytes {
-    return this[3].toBytes();
-  }
-
-  get referenceModule(): Address {
-    return this[4].toAddress();
-  }
-
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
-  }
-
-  get sig(): LensHub__postWithSigInputVarsSigStruct {
-    return changetype<LensHub__postWithSigInputVarsSigStruct>(
-      this[6].toTuple()
-    );
-  }
-}
-
-export class LensHub__postWithSigInputVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
-  }
-
-  get r(): Bytes {
-    return this[1].toBytes();
-  }
-
-  get s(): Bytes {
-    return this[2].toBytes();
-  }
-
-  get deadline(): BigInt {
-    return this[3].toBigInt();
-  }
-}
-
 export class LensHub__tokenDataOfResultValue0Struct extends ethereum.Tuple {
   get owner(): Address {
     return this[0].toAddress();
@@ -555,236 +1241,6 @@ export class LensHub extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  collect(profileId: BigInt, pubId: BigInt, data: Bytes): BigInt {
-    let result = super.call(
-      "collect",
-      "collect(uint256,uint256,bytes):(uint256)",
-      [
-        ethereum.Value.fromUnsignedBigInt(profileId),
-        ethereum.Value.fromUnsignedBigInt(pubId),
-        ethereum.Value.fromBytes(data)
-      ]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_collect(
-    profileId: BigInt,
-    pubId: BigInt,
-    data: Bytes
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "collect",
-      "collect(uint256,uint256,bytes):(uint256)",
-      [
-        ethereum.Value.fromUnsignedBigInt(profileId),
-        ethereum.Value.fromUnsignedBigInt(pubId),
-        ethereum.Value.fromBytes(data)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  collectWithSig(vars: LensHub__collectWithSigInputVarsStruct): BigInt {
-    let result = super.call(
-      "collectWithSig",
-      "collectWithSig((address,uint256,uint256,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_collectWithSig(
-    vars: LensHub__collectWithSigInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "collectWithSig",
-      "collectWithSig((address,uint256,uint256,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  comment(vars: LensHub__commentInputVarsStruct): BigInt {
-    let result = super.call(
-      "comment",
-      "comment((uint256,string,uint256,uint256,bytes,address,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_comment(
-    vars: LensHub__commentInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "comment",
-      "comment((uint256,string,uint256,uint256,bytes,address,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  commentWithSig(vars: LensHub__commentWithSigInputVarsStruct): BigInt {
-    let result = super.call(
-      "commentWithSig",
-      "commentWithSig((uint256,string,uint256,uint256,bytes,address,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_commentWithSig(
-    vars: LensHub__commentWithSigInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "commentWithSig",
-      "commentWithSig((uint256,string,uint256,uint256,bytes,address,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  createProfile(vars: LensHub__createProfileInputVarsStruct): BigInt {
-    let result = super.call(
-      "createProfile",
-      "createProfile((address,string,string,address,bytes,string)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_createProfile(
-    vars: LensHub__createProfileInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "createProfile",
-      "createProfile((address,string,string,address,bytes,string)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  defaultProfile(wallet: Address): BigInt {
-    let result = super.call(
-      "defaultProfile",
-      "defaultProfile(address):(uint256)",
-      [ethereum.Value.fromAddress(wallet)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_defaultProfile(wallet: Address): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "defaultProfile",
-      "defaultProfile(address):(uint256)",
-      [ethereum.Value.fromAddress(wallet)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  exists(tokenId: BigInt): boolean {
-    let result = super.call("exists", "exists(uint256):(bool)", [
-      ethereum.Value.fromUnsignedBigInt(tokenId)
-    ]);
-
-    return result[0].toBoolean();
-  }
-
-  try_exists(tokenId: BigInt): ethereum.CallResult<boolean> {
-    let result = super.tryCall("exists", "exists(uint256):(bool)", [
-      ethereum.Value.fromUnsignedBigInt(tokenId)
-    ]);
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBoolean());
-  }
-
-  follow(profileIds: Array<BigInt>, datas: Array<Bytes>): Array<BigInt> {
-    let result = super.call("follow", "follow(uint256[],bytes[]):(uint256[])", [
-      ethereum.Value.fromUnsignedBigIntArray(profileIds),
-      ethereum.Value.fromBytesArray(datas)
-    ]);
-
-    return result[0].toBigIntArray();
-  }
-
-  try_follow(
-    profileIds: Array<BigInt>,
-    datas: Array<Bytes>
-  ): ethereum.CallResult<Array<BigInt>> {
-    let result = super.tryCall(
-      "follow",
-      "follow(uint256[],bytes[]):(uint256[])",
-      [
-        ethereum.Value.fromUnsignedBigIntArray(profileIds),
-        ethereum.Value.fromBytesArray(datas)
-      ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigIntArray());
-  }
-
-  followWithSig(vars: LensHub__followWithSigInputVarsStruct): Array<BigInt> {
-    let result = super.call(
-      "followWithSig",
-      "followWithSig((address,uint256[],bytes[],(uint8,bytes32,bytes32,uint256))):(uint256[])",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigIntArray();
-  }
-
-  try_followWithSig(
-    vars: LensHub__followWithSigInputVarsStruct
-  ): ethereum.CallResult<Array<BigInt>> {
-    let result = super.tryCall(
-      "followWithSig",
-      "followWithSig((address,uint256[],bytes[],(uint8,bytes32,bytes32,uint256))):(uint256[])",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigIntArray());
   }
 
   getApproved(tokenId: BigInt): Address {
@@ -864,29 +1320,6 @@ export class LensHub extends ethereum.SmartContract {
         ethereum.Value.fromUnsignedBigInt(profileId),
         ethereum.Value.fromUnsignedBigInt(pubId)
       ]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  getCollectNFTImpl(): Address {
-    let result = super.call(
-      "getCollectNFTImpl",
-      "getCollectNFTImpl():(address)",
-      []
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_getCollectNFTImpl(): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "getCollectNFTImpl",
-      "getCollectNFTImpl():(address)",
-      []
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1009,29 +1442,6 @@ export class LensHub extends ethereum.SmartContract {
       "getFollowNFT",
       "getFollowNFT(uint256):(address)",
       [ethereum.Value.fromUnsignedBigInt(profileId)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  getFollowNFTImpl(): Address {
-    let result = super.call(
-      "getFollowNFTImpl",
-      "getFollowNFTImpl():(address)",
-      []
-    );
-
-    return result[0].toAddress();
-  }
-
-  try_getFollowNFTImpl(): ethereum.CallResult<Address> {
-    let result = super.tryCall(
-      "getFollowNFTImpl",
-      "getFollowNFTImpl():(address)",
-      []
     );
     if (result.reverted) {
       return new ethereum.CallResult();
@@ -1473,56 +1883,6 @@ export class LensHub extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
-  mirror(vars: LensHub__mirrorInputVarsStruct): BigInt {
-    let result = super.call(
-      "mirror",
-      "mirror((uint256,uint256,uint256,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_mirror(
-    vars: LensHub__mirrorInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "mirror",
-      "mirror((uint256,uint256,uint256,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  mirrorWithSig(vars: LensHub__mirrorWithSigInputVarsStruct): BigInt {
-    let result = super.call(
-      "mirrorWithSig",
-      "mirrorWithSig((uint256,uint256,uint256,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_mirrorWithSig(
-    vars: LensHub__mirrorWithSigInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "mirrorWithSig",
-      "mirrorWithSig((uint256,uint256,uint256,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
   name(): string {
     let result = super.call("name", "name():(string)", []);
 
@@ -1555,54 +1915,6 @@ export class LensHub extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(value[0].toAddress());
-  }
-
-  post(vars: LensHub__postInputVarsStruct): BigInt {
-    let result = super.call(
-      "post",
-      "post((uint256,string,address,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_post(vars: LensHub__postInputVarsStruct): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "post",
-      "post((uint256,string,address,bytes,address,bytes)):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
-  }
-
-  postWithSig(vars: LensHub__postWithSigInputVarsStruct): BigInt {
-    let result = super.call(
-      "postWithSig",
-      "postWithSig((uint256,string,address,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-
-    return result[0].toBigInt();
-  }
-
-  try_postWithSig(
-    vars: LensHub__postWithSigInputVarsStruct
-  ): ethereum.CallResult<BigInt> {
-    let result = super.tryCall(
-      "postWithSig",
-      "postWithSig((uint256,string,address,bytes,address,bytes,(uint8,bytes32,bytes32,uint256))):(uint256)",
-      [ethereum.Value.fromTuple(vars)]
-    );
-    if (result.reverted) {
-      return new ethereum.CallResult();
-    }
-    let value = result.value;
-    return ethereum.CallResult.fromValue(value[0].toBigInt());
   }
 
   sigNonces(param0: Address): BigInt {
@@ -1967,10 +2279,6 @@ export class CollectCall__Outputs {
   constructor(call: CollectCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class CollectWithSigCall extends ethereum.Call {
@@ -2002,10 +2310,6 @@ export class CollectWithSigCall__Outputs {
 
   constructor(call: CollectWithSigCall) {
     this._call = call;
-  }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
   }
 }
 
@@ -2079,10 +2383,6 @@ export class CommentCall__Outputs {
   constructor(call: CommentCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class CommentCallVarsStruct extends ethereum.Tuple {
@@ -2102,24 +2402,20 @@ export class CommentCallVarsStruct extends ethereum.Tuple {
     return this[3].toBigInt();
   }
 
-  get referenceModuleData(): Bytes {
-    return this[4].toBytes();
-  }
-
   get collectModule(): Address {
-    return this[5].toAddress();
+    return this[4].toAddress();
   }
 
-  get collectModuleInitData(): Bytes {
-    return this[6].toBytes();
+  get collectModuleData(): Bytes {
+    return this[5].toBytes();
   }
 
   get referenceModule(): Address {
-    return this[7].toAddress();
+    return this[6].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
-    return this[8].toBytes();
+  get referenceModuleData(): Bytes {
+    return this[7].toBytes();
   }
 }
 
@@ -2153,10 +2449,6 @@ export class CommentWithSigCall__Outputs {
   constructor(call: CommentWithSigCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class CommentWithSigCallVarsStruct extends ethereum.Tuple {
@@ -2176,28 +2468,24 @@ export class CommentWithSigCallVarsStruct extends ethereum.Tuple {
     return this[3].toBigInt();
   }
 
-  get referenceModuleData(): Bytes {
-    return this[4].toBytes();
-  }
-
   get collectModule(): Address {
-    return this[5].toAddress();
+    return this[4].toAddress();
   }
 
-  get collectModuleInitData(): Bytes {
-    return this[6].toBytes();
+  get collectModuleData(): Bytes {
+    return this[5].toBytes();
   }
 
   get referenceModule(): Address {
-    return this[7].toAddress();
+    return this[6].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
-    return this[8].toBytes();
+  get referenceModuleData(): Bytes {
+    return this[7].toBytes();
   }
 
   get sig(): CommentWithSigCallVarsSigStruct {
-    return changetype<CommentWithSigCallVarsSigStruct>(this[9].toTuple());
+    return changetype<CommentWithSigCallVarsSigStruct>(this[8].toTuple());
   }
 }
 
@@ -2249,10 +2537,6 @@ export class CreateProfileCall__Outputs {
   constructor(call: CreateProfileCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class CreateProfileCallVarsStruct extends ethereum.Tuple {
@@ -2272,7 +2556,7 @@ export class CreateProfileCallVarsStruct extends ethereum.Tuple {
     return this[3].toAddress();
   }
 
-  get followModuleInitData(): Bytes {
+  get followModuleData(): Bytes {
     return this[4].toBytes();
   }
 
@@ -2401,10 +2685,6 @@ export class FollowCall__Outputs {
   constructor(call: FollowCall) {
     this._call = call;
   }
-
-  get value0(): Array<BigInt> {
-    return this._call.outputValues[0].value.toBigIntArray();
-  }
 }
 
 export class FollowWithSigCall extends ethereum.Call {
@@ -2436,10 +2716,6 @@ export class FollowWithSigCall__Outputs {
 
   constructor(call: FollowWithSigCall) {
     this._call = call;
-  }
-
-  get value0(): Array<BigInt> {
-    return this._call.outputValues[0].value.toBigIntArray();
   }
 }
 
@@ -2547,10 +2823,6 @@ export class MirrorCall__Outputs {
   constructor(call: MirrorCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class MirrorCallVarsStruct extends ethereum.Tuple {
@@ -2566,16 +2838,12 @@ export class MirrorCallVarsStruct extends ethereum.Tuple {
     return this[2].toBigInt();
   }
 
-  get referenceModuleData(): Bytes {
-    return this[3].toBytes();
-  }
-
   get referenceModule(): Address {
-    return this[4].toAddress();
+    return this[3].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
+  get referenceModuleData(): Bytes {
+    return this[4].toBytes();
   }
 }
 
@@ -2609,10 +2877,6 @@ export class MirrorWithSigCall__Outputs {
   constructor(call: MirrorWithSigCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class MirrorWithSigCallVarsStruct extends ethereum.Tuple {
@@ -2628,20 +2892,16 @@ export class MirrorWithSigCallVarsStruct extends ethereum.Tuple {
     return this[2].toBigInt();
   }
 
-  get referenceModuleData(): Bytes {
-    return this[3].toBytes();
-  }
-
   get referenceModule(): Address {
-    return this[4].toAddress();
+    return this[3].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
-    return this[5].toBytes();
+  get referenceModuleData(): Bytes {
+    return this[4].toBytes();
   }
 
   get sig(): MirrorWithSigCallVarsSigStruct {
-    return changetype<MirrorWithSigCallVarsSigStruct>(this[6].toTuple());
+    return changetype<MirrorWithSigCallVarsSigStruct>(this[5].toTuple());
   }
 }
 
@@ -2813,10 +3073,6 @@ export class PostCall__Outputs {
   constructor(call: PostCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class PostCallVarsStruct extends ethereum.Tuple {
@@ -2832,7 +3088,7 @@ export class PostCallVarsStruct extends ethereum.Tuple {
     return this[2].toAddress();
   }
 
-  get collectModuleInitData(): Bytes {
+  get collectModuleData(): Bytes {
     return this[3].toBytes();
   }
 
@@ -2840,7 +3096,7 @@ export class PostCallVarsStruct extends ethereum.Tuple {
     return this[4].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
+  get referenceModuleData(): Bytes {
     return this[5].toBytes();
   }
 }
@@ -2875,10 +3131,6 @@ export class PostWithSigCall__Outputs {
   constructor(call: PostWithSigCall) {
     this._call = call;
   }
-
-  get value0(): BigInt {
-    return this._call.outputValues[0].value.toBigInt();
-  }
 }
 
 export class PostWithSigCallVarsStruct extends ethereum.Tuple {
@@ -2894,7 +3146,7 @@ export class PostWithSigCallVarsStruct extends ethereum.Tuple {
     return this[2].toAddress();
   }
 
-  get collectModuleInitData(): Bytes {
+  get collectModuleData(): Bytes {
     return this[3].toBytes();
   }
 
@@ -2902,7 +3154,7 @@ export class PostWithSigCallVarsStruct extends ethereum.Tuple {
     return this[4].toAddress();
   }
 
-  get referenceModuleInitData(): Bytes {
+  get referenceModuleData(): Bytes {
     return this[5].toBytes();
   }
 
@@ -3040,102 +3292,6 @@ export class SetApprovalForAllCall__Outputs {
 
   constructor(call: SetApprovalForAllCall) {
     this._call = call;
-  }
-}
-
-export class SetDefaultProfileCall extends ethereum.Call {
-  get inputs(): SetDefaultProfileCall__Inputs {
-    return new SetDefaultProfileCall__Inputs(this);
-  }
-
-  get outputs(): SetDefaultProfileCall__Outputs {
-    return new SetDefaultProfileCall__Outputs(this);
-  }
-}
-
-export class SetDefaultProfileCall__Inputs {
-  _call: SetDefaultProfileCall;
-
-  constructor(call: SetDefaultProfileCall) {
-    this._call = call;
-  }
-
-  get profileId(): BigInt {
-    return this._call.inputValues[0].value.toBigInt();
-  }
-}
-
-export class SetDefaultProfileCall__Outputs {
-  _call: SetDefaultProfileCall;
-
-  constructor(call: SetDefaultProfileCall) {
-    this._call = call;
-  }
-}
-
-export class SetDefaultProfileWithSigCall extends ethereum.Call {
-  get inputs(): SetDefaultProfileWithSigCall__Inputs {
-    return new SetDefaultProfileWithSigCall__Inputs(this);
-  }
-
-  get outputs(): SetDefaultProfileWithSigCall__Outputs {
-    return new SetDefaultProfileWithSigCall__Outputs(this);
-  }
-}
-
-export class SetDefaultProfileWithSigCall__Inputs {
-  _call: SetDefaultProfileWithSigCall;
-
-  constructor(call: SetDefaultProfileWithSigCall) {
-    this._call = call;
-  }
-
-  get vars(): SetDefaultProfileWithSigCallVarsStruct {
-    return changetype<SetDefaultProfileWithSigCallVarsStruct>(
-      this._call.inputValues[0].value.toTuple()
-    );
-  }
-}
-
-export class SetDefaultProfileWithSigCall__Outputs {
-  _call: SetDefaultProfileWithSigCall;
-
-  constructor(call: SetDefaultProfileWithSigCall) {
-    this._call = call;
-  }
-}
-
-export class SetDefaultProfileWithSigCallVarsStruct extends ethereum.Tuple {
-  get wallet(): Address {
-    return this[0].toAddress();
-  }
-
-  get profileId(): BigInt {
-    return this[1].toBigInt();
-  }
-
-  get sig(): SetDefaultProfileWithSigCallVarsSigStruct {
-    return changetype<SetDefaultProfileWithSigCallVarsSigStruct>(
-      this[2].toTuple()
-    );
-  }
-}
-
-export class SetDefaultProfileWithSigCallVarsSigStruct extends ethereum.Tuple {
-  get v(): i32 {
-    return this[0].toI32();
-  }
-
-  get r(): Bytes {
-    return this[1].toBytes();
-  }
-
-  get s(): Bytes {
-    return this[2].toBytes();
-  }
-
-  get deadline(): BigInt {
-    return this[3].toBigInt();
   }
 }
 
@@ -3292,7 +3448,7 @@ export class SetFollowModuleCall__Inputs {
     return this._call.inputValues[1].value.toAddress();
   }
 
-  get followModuleInitData(): Bytes {
+  get followModuleData(): Bytes {
     return this._call.inputValues[2].value.toBytes();
   }
 }
@@ -3346,7 +3502,7 @@ export class SetFollowModuleWithSigCallVarsStruct extends ethereum.Tuple {
     return this[1].toAddress();
   }
 
-  get followModuleInitData(): Bytes {
+  get followModuleData(): Bytes {
     return this[2].toBytes();
   }
 

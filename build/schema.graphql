@@ -25,3 +25,114 @@ type Transfer @entity {
   to: Bytes! # address
   tokenId: BigInt! # uint256
 }
+
+type Dispatcher @entity {
+  id: ID!
+  address: String!
+  canUseRelay: Boolean!
+}
+
+type ProfileStats @entity {
+  id: ID!
+  totalFollowers: BigInt!
+  totalFollowing: BigInt!
+  totalPosts: BigInt!
+  totalComments: BigInt!
+  totalMirrors: BigInt!
+  totalPublications: BigInt!
+  totalCollects: BigInt!
+}
+
+type NftImage @entity {
+  id: ID!
+  contractAddress: String!
+  tokenId: String!
+  url: String!
+  chainId: BigInt!
+  verified: Boolean!
+}
+
+type Media @entity {
+  id: ID!
+  url: String!
+  width: BigInt
+  height: BigInt
+  size: BigInt
+  mimeType: String
+}
+
+type MediaSet @entity {
+  id: ID!
+  original: Media!
+  small: Media
+  medium: Media
+}
+
+enum ProfileMedia {
+  NftImage
+  MediaSet
+}
+
+type Erc20 @entity {
+  id: ID!
+  name: String!
+  symbol: String!
+  decimals: BigInt!
+  address: String!
+}
+
+type ModuleFeeAmount @entity {
+  id: ID!
+  asset: Erc20!
+  vaue: String!
+}
+
+type FeeFollowModuleSettings @entity {
+  id: ID!
+  contractAddress: String!
+  amount: ModuleFeeAmount!
+  recipient: String!
+}
+
+type ProfileFollowModuleSettings @entity {
+  id: ID!
+  contractAddress: String!
+}
+
+type RevertFollowModuleSettings @entity {
+  id: ID!
+  contractAddress: String!
+}
+
+enum FollowModule {
+  FeeFollowModuleSettings
+  ProfileFollowModuleSettings
+  RevertFollowModuleSettings
+}
+
+type Attribute @entity {
+  id: ID!
+  displayType: String
+  traitType: String
+  key: String!
+  value: String!
+}
+
+type Profile @entity {
+  id: ID!
+  name: String
+  bio: String
+  followNftAddress: String
+  metadata: String
+  handle: String!
+  picture: ProfileMedia
+  coverPicture: ProfileMedia
+  onwnedBy: String!
+  dispatcher: Dispatcher
+  stats: ProfileStats!
+  followModule: FollowModule
+  isDefault: Boolean!
+  attributes: [Attribute!]
+  isFollowedByMe: Boolean!
+  isFollowingMe: Boolean!
+}

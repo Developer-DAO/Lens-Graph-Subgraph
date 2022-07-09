@@ -27,6 +27,8 @@ dataSources:
           handler: handleApprovalForAll
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
+        - event: ProfileCreated(indexed uint256,indexed address,indexed address,string,string,address,bytes,string,uint256)
+          handler: handleProfileCreated
       file: ./src/lens-hub.ts
   - kind: ethereum
     name: TransparentUpgradeableProxy
