@@ -1,3 +1,10 @@
+type ExampleEntity @entity {
+  id: ID!
+  count: BigInt!
+  previousAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+}
+
 type Approval @entity {
   id: ID!
   owner: Bytes! # address

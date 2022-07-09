@@ -27,3 +27,28 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: LensHub/LensHub.wasm
+  - kind: ethereum
+    name: TransparentUpgradeableProxy
+    network: matic
+    source:
+      address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
+      abi: TransparentUpgradeableProxy
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AdminChanged
+        - BeaconUpgraded
+        - Upgraded
+      abis:
+        - name: TransparentUpgradeableProxy
+          file: TransparentUpgradeableProxy/abis/TransparentUpgradeableProxy.json
+      eventHandlers:
+        - event: AdminChanged(address,address)
+          handler: handleAdminChanged
+        - event: BeaconUpgraded(indexed address)
+          handler: handleBeaconUpgraded
+        - event: Upgraded(indexed address)
+          handler: handleUpgraded
+      file: TransparentUpgradeableProxy/TransparentUpgradeableProxy.wasm
