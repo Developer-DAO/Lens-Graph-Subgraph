@@ -16,6 +16,7 @@ dataSources:
         - Approval
         - ApprovalForAll
         - Transfer
+        - Profile
       abis:
         - name: LensHub
           file: ./abis/LensHub.json
