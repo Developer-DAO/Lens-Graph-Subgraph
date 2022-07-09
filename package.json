@@ -1,0 +1,16 @@
+{
+  "name": "Lens-Protocol-Matic",
+  "license": "UNLICENSED",
+  "scripts": {
+    "codegen": "graph codegen",
+    "build": "graph build",
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ Nazeeh21/Lens-Protocol-Matic",
+    "create-local": "graph create --node http://localhost:8020/ Nazeeh21/Lens-Protocol-Matic",
+    "remove-local": "graph remove --node http://localhost:8020/ Nazeeh21/Lens-Protocol-Matic",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Nazeeh21/Lens-Protocol-Matic"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.30.0",
+    "@graphprotocol/graph-ts": "0.27.0"
+  }
+}
