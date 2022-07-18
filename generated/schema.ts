@@ -1249,3 +1249,1301 @@ export class Profile extends Entity {
     this.set("isFollowingMe", Value.fromBoolean(value));
   }
 }
+
+export class PublicationStats extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save PublicationStats entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type PublicationStats must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("PublicationStats", id.toString(), this);
+    }
+  }
+
+  static load(id: string): PublicationStats | null {
+    return changetype<PublicationStats | null>(
+      store.get("PublicationStats", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get totalAmountOfMirrors(): BigInt {
+    let value = this.get("totalAmountOfMirrors");
+    return value!.toBigInt();
+  }
+
+  set totalAmountOfMirrors(value: BigInt) {
+    this.set("totalAmountOfMirrors", Value.fromBigInt(value));
+  }
+
+  get totalAmountOfCollects(): BigInt {
+    let value = this.get("totalAmountOfCollects");
+    return value!.toBigInt();
+  }
+
+  set totalAmountOfCollects(value: BigInt) {
+    this.set("totalAmountOfCollects", Value.fromBigInt(value));
+  }
+
+  get totalAmountOfComments(): BigInt {
+    let value = this.get("totalAmountOfComments");
+    return value!.toBigInt();
+  }
+
+  set totalAmountOfComments(value: BigInt) {
+    this.set("totalAmountOfComments", Value.fromBigInt(value));
+  }
+
+  get totalUpvotes(): BigInt {
+    let value = this.get("totalUpvotes");
+    return value!.toBigInt();
+  }
+
+  set totalUpvotes(value: BigInt) {
+    this.set("totalUpvotes", Value.fromBigInt(value));
+  }
+
+  get totalDownvotes(): BigInt {
+    let value = this.get("totalDownvotes");
+    return value!.toBigInt();
+  }
+
+  set totalDownvotes(value: BigInt) {
+    this.set("totalDownvotes", Value.fromBigInt(value));
+  }
+}
+
+export class Wallet extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Wallet entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Wallet must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Wallet", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Wallet | null {
+    return changetype<Wallet | null>(store.get("Wallet", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get address(): string {
+    let value = this.get("address");
+    return value!.toString();
+  }
+
+  set address(value: string) {
+    this.set("address", Value.fromString(value));
+  }
+
+  get defaulProfile(): string {
+    let value = this.get("defaulProfile");
+    return value!.toString();
+  }
+
+  set defaulProfile(value: string) {
+    this.set("defaulProfile", Value.fromString(value));
+  }
+}
+
+export class MetadataAttributeOutput extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save MetadataAttributeOutput entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type MetadataAttributeOutput must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("MetadataAttributeOutput", id.toString(), this);
+    }
+  }
+
+  static load(id: string): MetadataAttributeOutput | null {
+    return changetype<MetadataAttributeOutput | null>(
+      store.get("MetadataAttributeOutput", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get displayType(): string | null {
+    let value = this.get("displayType");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set displayType(value: string | null) {
+    if (!value) {
+      this.unset("displayType");
+    } else {
+      this.set("displayType", Value.fromString(<string>value));
+    }
+  }
+
+  get traitType(): string | null {
+    let value = this.get("traitType");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set traitType(value: string | null) {
+    if (!value) {
+      this.unset("traitType");
+    } else {
+      this.set("traitType", Value.fromString(<string>value));
+    }
+  }
+
+  get value(): string | null {
+    let value = this.get("value");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set value(value: string | null) {
+    if (!value) {
+      this.unset("value");
+    } else {
+      this.set("value", Value.fromString(<string>value));
+    }
+  }
+}
+
+export class MetadataOutput extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save MetadataOutput entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type MetadataOutput must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("MetadataOutput", id.toString(), this);
+    }
+  }
+
+  static load(id: string): MetadataOutput | null {
+    return changetype<MetadataOutput | null>(store.get("MetadataOutput", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get name(): string | null {
+    let value = this.get("name");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set name(value: string | null) {
+    if (!value) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromString(<string>value));
+    }
+  }
+
+  get description(): string | null {
+    let value = this.get("description");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set description(value: string | null) {
+    if (!value) {
+      this.unset("description");
+    } else {
+      this.set("description", Value.fromString(<string>value));
+    }
+  }
+
+  get content(): string | null {
+    let value = this.get("content");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set content(value: string | null) {
+    if (!value) {
+      this.unset("content");
+    } else {
+      this.set("content", Value.fromString(<string>value));
+    }
+  }
+
+  get image(): string | null {
+    let value = this.get("image");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set image(value: string | null) {
+    if (!value) {
+      this.unset("image");
+    } else {
+      this.set("image", Value.fromString(<string>value));
+    }
+  }
+
+  get cover(): string | null {
+    let value = this.get("cover");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set cover(value: string | null) {
+    if (!value) {
+      this.unset("cover");
+    } else {
+      this.set("cover", Value.fromString(<string>value));
+    }
+  }
+
+  get media(): Array<string> {
+    let value = this.get("media");
+    return value!.toStringArray();
+  }
+
+  set media(value: Array<string>) {
+    this.set("media", Value.fromStringArray(value));
+  }
+
+  get attributes(): Array<string> {
+    let value = this.get("attributes");
+    return value!.toStringArray();
+  }
+
+  set attributes(value: Array<string>) {
+    this.set("attributes", Value.fromStringArray(value));
+  }
+}
+
+export class ReactionFieldResolverRequest extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save ReactionFieldResolverRequest entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ReactionFieldResolverRequest must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ReactionFieldResolverRequest", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ReactionFieldResolverRequest | null {
+    return changetype<ReactionFieldResolverRequest | null>(
+      store.get("ReactionFieldResolverRequest", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get profileId(): BigInt | null {
+    let value = this.get("profileId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set profileId(value: BigInt | null) {
+    if (!value) {
+      this.unset("profileId");
+    } else {
+      this.set("profileId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+}
+
+export class FreeCollectModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save FreeCollectModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type FreeCollectModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("FreeCollectModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): FreeCollectModuleSettings | null {
+    return changetype<FreeCollectModuleSettings | null>(
+      store.get("FreeCollectModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get followerOnly(): boolean {
+    let value = this.get("followerOnly");
+    return value!.toBoolean();
+  }
+
+  set followerOnly(value: boolean) {
+    this.set("followerOnly", Value.fromBoolean(value));
+  }
+}
+
+export class FeeCollectModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save FeeCollectModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type FeeCollectModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("FeeCollectModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): FeeCollectModuleSettings | null {
+    return changetype<FeeCollectModuleSettings | null>(
+      store.get("FeeCollectModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get amount(): string {
+    let value = this.get("amount");
+    return value!.toString();
+  }
+
+  set amount(value: string) {
+    this.set("amount", Value.fromString(value));
+  }
+
+  get recipient(): string {
+    let value = this.get("recipient");
+    return value!.toString();
+  }
+
+  set recipient(value: string) {
+    this.set("recipient", Value.fromString(value));
+  }
+
+  get referralFee(): BigDecimal {
+    let value = this.get("referralFee");
+    return value!.toBigDecimal();
+  }
+
+  set referralFee(value: BigDecimal) {
+    this.set("referralFee", Value.fromBigDecimal(value));
+  }
+
+  get followerOnly(): boolean {
+    let value = this.get("followerOnly");
+    return value!.toBoolean();
+  }
+
+  set followerOnly(value: boolean) {
+    this.set("followerOnly", Value.fromBoolean(value));
+  }
+}
+
+export class LimitedFeeCollectModule extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save LimitedFeeCollectModule entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type LimitedFeeCollectModule must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("LimitedFeeCollectModule", id.toString(), this);
+    }
+  }
+
+  static load(id: string): LimitedFeeCollectModule | null {
+    return changetype<LimitedFeeCollectModule | null>(
+      store.get("LimitedFeeCollectModule", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get collectLimit(): string {
+    let value = this.get("collectLimit");
+    return value!.toString();
+  }
+
+  set collectLimit(value: string) {
+    this.set("collectLimit", Value.fromString(value));
+  }
+
+  get amount(): string {
+    let value = this.get("amount");
+    return value!.toString();
+  }
+
+  set amount(value: string) {
+    this.set("amount", Value.fromString(value));
+  }
+
+  get recipient(): string {
+    let value = this.get("recipient");
+    return value!.toString();
+  }
+
+  set recipient(value: string) {
+    this.set("recipient", Value.fromString(value));
+  }
+
+  get referralFee(): BigDecimal {
+    let value = this.get("referralFee");
+    return value!.toBigDecimal();
+  }
+
+  set referralFee(value: BigDecimal) {
+    this.set("referralFee", Value.fromBigDecimal(value));
+  }
+
+  get followerOnly(): boolean {
+    let value = this.get("followerOnly");
+    return value!.toBoolean();
+  }
+
+  set followerOnly(value: boolean) {
+    this.set("followerOnly", Value.fromBoolean(value));
+  }
+}
+
+export class LimitedTimedFeeCollectModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save LimitedTimedFeeCollectModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type LimitedTimedFeeCollectModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("LimitedTimedFeeCollectModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): LimitedTimedFeeCollectModuleSettings | null {
+    return changetype<LimitedTimedFeeCollectModuleSettings | null>(
+      store.get("LimitedTimedFeeCollectModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get collectLimit(): string {
+    let value = this.get("collectLimit");
+    return value!.toString();
+  }
+
+  set collectLimit(value: string) {
+    this.set("collectLimit", Value.fromString(value));
+  }
+
+  get amount(): string {
+    let value = this.get("amount");
+    return value!.toString();
+  }
+
+  set amount(value: string) {
+    this.set("amount", Value.fromString(value));
+  }
+
+  get recipient(): string {
+    let value = this.get("recipient");
+    return value!.toString();
+  }
+
+  set recipient(value: string) {
+    this.set("recipient", Value.fromString(value));
+  }
+
+  get referralFee(): BigDecimal {
+    let value = this.get("referralFee");
+    return value!.toBigDecimal();
+  }
+
+  set referralFee(value: BigDecimal) {
+    this.set("referralFee", Value.fromBigDecimal(value));
+  }
+
+  get followerOnly(): boolean {
+    let value = this.get("followerOnly");
+    return value!.toBoolean();
+  }
+
+  set followerOnly(value: boolean) {
+    this.set("followerOnly", Value.fromBoolean(value));
+  }
+
+  get endTimestamp(): string {
+    let value = this.get("endTimestamp");
+    return value!.toString();
+  }
+
+  set endTimestamp(value: string) {
+    this.set("endTimestamp", Value.fromString(value));
+  }
+}
+
+export class RevertCollectModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save RevertCollectModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type RevertCollectModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("RevertCollectModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): RevertCollectModuleSettings | null {
+    return changetype<RevertCollectModuleSettings | null>(
+      store.get("RevertCollectModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+}
+
+export class TimedFeeCollectModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save TimedFeeCollectModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TimedFeeCollectModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TimedFeeCollectModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): TimedFeeCollectModuleSettings | null {
+    return changetype<TimedFeeCollectModuleSettings | null>(
+      store.get("TimedFeeCollectModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+
+  get amount(): string {
+    let value = this.get("amount");
+    return value!.toString();
+  }
+
+  set amount(value: string) {
+    this.set("amount", Value.fromString(value));
+  }
+
+  get recipient(): string {
+    let value = this.get("recipient");
+    return value!.toString();
+  }
+
+  set recipient(value: string) {
+    this.set("recipient", Value.fromString(value));
+  }
+
+  get referralFee(): BigDecimal {
+    let value = this.get("referralFee");
+    return value!.toBigDecimal();
+  }
+
+  set referralFee(value: BigDecimal) {
+    this.set("referralFee", Value.fromBigDecimal(value));
+  }
+
+  get followerOnly(): boolean {
+    let value = this.get("followerOnly");
+    return value!.toBoolean();
+  }
+
+  set followerOnly(value: boolean) {
+    this.set("followerOnly", Value.fromBoolean(value));
+  }
+
+  get endTimestamp(): string {
+    let value = this.get("endTimestamp");
+    return value!.toString();
+  }
+
+  set endTimestamp(value: string) {
+    this.set("endTimestamp", Value.fromString(value));
+  }
+}
+
+export class FollowOnlyReferenceModuleSettings extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save FollowOnlyReferenceModuleSettings entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type FollowOnlyReferenceModuleSettings must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("FollowOnlyReferenceModuleSettings", id.toString(), this);
+    }
+  }
+
+  static load(id: string): FollowOnlyReferenceModuleSettings | null {
+    return changetype<FollowOnlyReferenceModuleSettings | null>(
+      store.get("FollowOnlyReferenceModuleSettings", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get type(): string {
+    let value = this.get("type");
+    return value!.toString();
+  }
+
+  set type(value: string) {
+    this.set("type", Value.fromString(value));
+  }
+
+  get contractAddress(): string {
+    let value = this.get("contractAddress");
+    return value!.toString();
+  }
+
+  set contractAddress(value: string) {
+    this.set("contractAddress", Value.fromString(value));
+  }
+}
+
+export class Mirror extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Mirror entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Mirror must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Mirror", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Mirror | null {
+    return changetype<Mirror | null>(store.get("Mirror", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get profile(): string {
+    let value = this.get("profile");
+    return value!.toString();
+  }
+
+  set profile(value: string) {
+    this.set("profile", Value.fromString(value));
+  }
+
+  get stats(): string {
+    let value = this.get("stats");
+    return value!.toString();
+  }
+
+  set stats(value: string) {
+    this.set("stats", Value.fromString(value));
+  }
+
+  get metadata(): string {
+    let value = this.get("metadata");
+    return value!.toString();
+  }
+
+  set metadata(value: string) {
+    this.set("metadata", Value.fromString(value));
+  }
+
+  get onChainContentURI(): string {
+    let value = this.get("onChainContentURI");
+    return value!.toString();
+  }
+
+  set onChainContentURI(value: string) {
+    this.set("onChainContentURI", Value.fromString(value));
+  }
+
+  get createdAt(): string {
+    let value = this.get("createdAt");
+    return value!.toString();
+  }
+
+  set createdAt(value: string) {
+    this.set("createdAt", Value.fromString(value));
+  }
+
+  get appId(): BigInt | null {
+    let value = this.get("appId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBigInt();
+    }
+  }
+
+  set appId(value: BigInt | null) {
+    if (!value) {
+      this.unset("appId");
+    } else {
+      this.set("appId", Value.fromBigInt(<BigInt>value));
+    }
+  }
+
+  get hidden(): boolean {
+    let value = this.get("hidden");
+    return value!.toBoolean();
+  }
+
+  set hidden(value: boolean) {
+    this.set("hidden", Value.fromBoolean(value));
+  }
+
+  get collectNftAddress(): string | null {
+    let value = this.get("collectNftAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectNftAddress(value: string | null) {
+    if (!value) {
+      this.unset("collectNftAddress");
+    } else {
+      this.set("collectNftAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get reaction(): string | null {
+    let value = this.get("reaction");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set reaction(value: string | null) {
+    if (!value) {
+      this.unset("reaction");
+    } else {
+      this.set("reaction", Value.fromString(<string>value));
+    }
+  }
+
+  get hasCollectedByMe(): boolean {
+    let value = this.get("hasCollectedByMe");
+    return value!.toBoolean();
+  }
+
+  set hasCollectedByMe(value: boolean) {
+    this.set("hasCollectedByMe", Value.fromBoolean(value));
+  }
+}
+
+export class Post extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Post entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Post must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Post", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Post | null {
+    return changetype<Post | null>(store.get("Post", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get profile(): string {
+    let value = this.get("profile");
+    return value!.toString();
+  }
+
+  set profile(value: string) {
+    this.set("profile", Value.fromString(value));
+  }
+
+  get stats(): string {
+    let value = this.get("stats");
+    return value!.toString();
+  }
+
+  set stats(value: string) {
+    this.set("stats", Value.fromString(value));
+  }
+
+  get metadata(): string {
+    let value = this.get("metadata");
+    return value!.toString();
+  }
+
+  set metadata(value: string) {
+    this.set("metadata", Value.fromString(value));
+  }
+
+  get onChainContentURI(): string {
+    let value = this.get("onChainContentURI");
+    return value!.toString();
+  }
+
+  set onChainContentURI(value: string) {
+    this.set("onChainContentURI", Value.fromString(value));
+  }
+
+  get createdAt(): string {
+    let value = this.get("createdAt");
+    return value!.toString();
+  }
+
+  set createdAt(value: string) {
+    this.set("createdAt", Value.fromString(value));
+  }
+
+  get appId(): string | null {
+    let value = this.get("appId");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set appId(value: string | null) {
+    if (!value) {
+      this.unset("appId");
+    } else {
+      this.set("appId", Value.fromString(<string>value));
+    }
+  }
+
+  get hidden(): boolean {
+    let value = this.get("hidden");
+    return value!.toBoolean();
+  }
+
+  set hidden(value: boolean) {
+    this.set("hidden", Value.fromBoolean(value));
+  }
+
+  get collectNftAddress(): string | null {
+    let value = this.get("collectNftAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectNftAddress(value: string | null) {
+    if (!value) {
+      this.unset("collectNftAddress");
+    } else {
+      this.set("collectNftAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
+  }
+
+  get reaction(): string | null {
+    let value = this.get("reaction");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set reaction(value: string | null) {
+    if (!value) {
+      this.unset("reaction");
+    } else {
+      this.set("reaction", Value.fromString(<string>value));
+    }
+  }
+
+  get hasCollectedByMe(): boolean {
+    let value = this.get("hasCollectedByMe");
+    return value!.toBoolean();
+  }
+
+  set hasCollectedByMe(value: boolean) {
+    this.set("hasCollectedByMe", Value.fromBoolean(value));
+  }
+
+  get mirrors(): Array<string> {
+    let value = this.get("mirrors");
+    return value!.toStringArray();
+  }
+
+  set mirrors(value: Array<string>) {
+    this.set("mirrors", Value.fromStringArray(value));
+  }
+}

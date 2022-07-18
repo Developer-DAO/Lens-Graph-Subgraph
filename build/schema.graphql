@@ -136,3 +136,174 @@ type Profile @entity {
   isFollowedByMe: Boolean!
   isFollowingMe: Boolean!
 }
+
+enum ReactionTypes {
+  UPVOTE
+  DOWNVOTE
+}
+
+type PublicationStats @entity {
+  id: ID!
+  totalAmountOfMirrors: BigInt!
+  totalAmountOfCollects: BigInt!
+  totalAmountOfComments: BigInt!
+  totalUpvotes: BigInt!
+  totalDownvotes: BigInt!
+}
+
+type Wallet @entity {
+  id: ID!
+  address: String!
+  defaulProfile: Profile!
+}
+
+enum MetadataDisplayType {
+  BigInt
+  String
+  String
+}
+
+type MetadataAttributeOutput @entity {
+  id: ID!
+  displayType: MetadataDisplayType
+  traitType: String
+  value: String
+}
+
+type MetadataOutput @entity {
+  id: ID!
+  name: String
+  description: String
+  content: String
+  image: String
+  cover: MediaSet
+  media: [MediaSet!]!
+  attributes: [MetadataAttributeOutput!]!
+}
+
+union MainPostReference = Post | Mirror
+
+type ReactionFieldResolverRequest @entity {
+  id: ID!
+  profileId: BigInt
+}
+
+union CollectModule =
+    FreeCollectModuleSettings
+  | FeeCollectModuleSettings
+  | LimitedFeeCollectModuleSettings
+  | LimitedTimedFeeCollectModuleSettings
+  | RevertCollectModuleSettings
+  | TimedFeeCollectModuleSettings
+
+enum CollectModules {
+  LimitedFeeCollectModule
+  FeeCollectModule
+  LimitedTimedFeeCollectModule
+  TimedFeeCollectModule
+  RevertCollectModule
+  FreeCollectModule
+}
+
+type FreeCollectModuleSettings @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+  followerOnly: Boolean!
+}
+
+type FeeCollectModuleSettings @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+  amount: ModuleFeeAmount!
+  recipient: String!
+  referralFee: BigDecimal!
+  followerOnly: Boolean!
+}
+
+type LimitedFeeCollectModule @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+  collectLimit: String!
+  amount: ModuleFeeAmount!
+  recipient: String!
+  referralFee: BigDecimal!
+  followerOnly: Boolean!
+}
+
+type LimitedTimedFeeCollectModuleSettings @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+  collectLimit: String!
+  amount: ModuleFeeAmount!
+  recipient: String!
+  referralFee: BigDecimal!
+  followerOnly: Boolean!
+  endTimestamp: String!
+}
+
+type RevertCollectModuleSettings @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+}
+
+type TimedFeeCollectModuleSettings @entity {
+  id: ID!
+  type: CollectModules!
+  contractAddress: String!
+  amount: ModuleFeeAmount!
+  recipient: String!
+  referralFee: BigDecimal!
+  followerOnly: Boolean!
+  endTimestamp: String!
+}
+
+union MirrorablePublication = Post
+
+union ReferenceModule = FollowOnlyReferenceModuleSettings
+
+enum ReferenceModules {
+  FollowOnlyReferenceModule
+}
+
+type FollowOnlyReferenceModuleSettings @entity {
+  id: ID!
+  type: ReferenceModules!
+  contractAddress: String!
+}
+
+type Mirror @entity {
+  id: ID!
+  profile: Profile!
+  stats: PublicationStats!
+  metadata: MetadataOutput!
+  onChainContentURI: String!
+  createdAt: String!
+  appId: BigInt
+  hidden: Boolean!
+  collectNftAddress: String
+  reaction: ReactionTypes
+  hasCollectedByMe: Boolean!
+}
+
+type Post @entity {
+  id: ID!
+  profile: Profile!
+  stats: PublicationStats!
+  metadata: MetadataOutput!
+  onChainContentURI: String!
+  createdAt: String!
+  appId: String
+  hidden: Boolean!
+  collectNftAddress: String
+  collectedBy: Wallet
+  reaction: ReactionTypes
+  hasCollectedByMe: Boolean!
+  mirrors: [ID!]!
+}
+
+union Publication = Post | Mirror
