@@ -24,4 +24,6 @@ dataSources:
         - event: ProfileCreated(indexed uint256,indexed address,indexed
             address,string,string,address,bytes,string,uint256)
           handler: handleProfileCreated
+        - event: ProfileImageURISet(indexed uint256,string,uint256)
+          handler: handleProfileImageURISet
       file: LensHub/LensHub.wasm
