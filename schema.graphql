@@ -287,4 +287,23 @@ type Post @entity {
   hasCollectedByMe: Boolean!
   mirrors: [ID!]!
 }
-
+type Comment @entity{
+  id: ID!
+  profile: Profile!
+  stats: PublicationStats!
+  metadata: MetadataOutput!
+  onChainContentURI: String!
+  createdAt: String!
+  collectModule: CollectModule!
+  referenceModule: ReferenceModule!
+  appId: String!
+  hidden: Boolean!
+  collectNftAddress:contractAddress!
+  mainPost:MainPostReference!
+  commentOn:Publication
+  firstComment:Comment
+  collectedBy:Wallet
+  reaction:ReactionTypes
+  hasCollectedByMe: Boolean!
+  mirrors:[ID!]!
+}
