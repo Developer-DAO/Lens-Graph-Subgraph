@@ -274,17 +274,62 @@ type Mirror @entity {
 
 type Post @entity {
   id: ID!
+  profile: Profile
+  stats: PublicationStats
+  metadata: MetadataOutput
+  onChainContentURI: String!
+  createdAt: String!
+  appId: String
+  hidden: Boolean
+  collectNftAddress: String
+  collectedBy: Wallet
+  reaction: ReactionTypes
+  hasCollectedByMe: Boolean
+  mirrors: [ID!]
+}
+
+type Comment @entity{
+  id: ID!
   profile: Profile!
   stats: PublicationStats!
   metadata: MetadataOutput!
   onChainContentURI: String!
   createdAt: String!
-  appId: String
+  appId: String!
   hidden: Boolean!
-  collectNftAddress: String
-  collectedBy: Wallet
-  reaction: ReactionTypes
+  collectNftAddress: String!
+  firstComment:Comment
+  collectedBy:Wallet
+  reaction:ReactionTypes
   hasCollectedByMe: Boolean!
-  mirrors: [ID!]!
+  mirrors:[ID!]!
 }
 
+type Owner @entity {
+  id: ID!
+  amount: BigDecimal!
+  address: String!
+}
+
+type NFTContent @entity {
+  id: ID!
+  uri: String!
+  metaType: String!
+  animatedUrl: String
+}
+
+type NFT @entity {
+  id: ID!
+  contractName: String!
+  contractAddress: String!
+  symbol: String!
+  tokenId: String!
+  owners: [Owner!]!
+  name: String!
+  description: String!
+  contentURI: String!
+  originalContent: NFTContent!
+  chainId: ID!
+  collectionName: String!
+  ercType: String!
+}

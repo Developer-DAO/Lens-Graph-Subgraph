@@ -274,19 +274,20 @@ type Mirror @entity {
 
 type Post @entity {
   id: ID!
-  profile: Profile!
-  stats: PublicationStats!
-  metadata: MetadataOutput!
+  profile: Profile
+  stats: PublicationStats
+  metadata: MetadataOutput
   onChainContentURI: String!
   createdAt: String!
   appId: String
-  hidden: Boolean!
+  hidden: Boolean
   collectNftAddress: String
   collectedBy: Wallet
   reaction: ReactionTypes
-  hasCollectedByMe: Boolean!
-  mirrors: [ID!]!
+  hasCollectedByMe: Boolean
+  mirrors: [ID!]
 }
+
 type Comment @entity{
   id: ID!
   profile: Profile!
@@ -294,13 +295,9 @@ type Comment @entity{
   metadata: MetadataOutput!
   onChainContentURI: String!
   createdAt: String!
-  collectModule: CollectModule!
-  referenceModule: ReferenceModule!
   appId: String!
   hidden: Boolean!
-  collectNftAddress:contractAddress!
-  mainPost:MainPostReference!
-  commentOn:Publication
+  collectNftAddress: String!
   firstComment:Comment
   collectedBy:Wallet
   reaction:ReactionTypes
@@ -309,17 +306,20 @@ type Comment @entity{
 }
 
 type Owner @entity {
-  amount: Float!
+  id: ID!
+  amount: BigDecimal!
   address: String!
 }
 
-type NFTContent {
+type NFTContent @entity {
+  id: ID!
   uri: String!
   metaType: String!
   animatedUrl: String
 }
 
 type NFT @entity {
+  id: ID!
   contractName: String!
   contractAddress: String!
   symbol: String!
@@ -329,7 +329,7 @@ type NFT @entity {
   description: String!
   contentURI: String!
   originalContent: NFTContent!
-  chainId: ChainId!
+  chainId: ID!
   collectionName: String!
   ercType: String!
 }

@@ -2,10 +2,11 @@ import { log } from "@graphprotocol/graph-ts";
 import {
   Approval as ApprovalEvent,
   ApprovalForAll as ApprovalForAllEvent,
+  PostCreated,
   ProfileCreated,
   Transfer as TransferEvent
 } from "../generated/LensHub/LensHub"
-import { Approval, ApprovalForAll, Profile, Transfer } from "../generated/schema"
+import { Approval, ApprovalForAll, Post, Profile, Transfer } from "../generated/schema"
 
 export function handleApproval(event: ApprovalEvent): void {
   let entity = new Approval(
@@ -49,5 +50,20 @@ export function handleProfileCreated(event: ProfileCreated): void {
     profile.isDefault = true
     profile.isFollowedByMe = false
     profile.save()
+  }
+}
+
+export function handlePostCreated(event: PostCreated): void {
+  let post = Post.load(event.params.pubId.toString())
+
+  if(!post) {
+    post = new Post(event.params.pubId.toString())
+    post.id = event.params.pubId.toString()
+    post.metadata = event.params.contentURI
+    post.onChainContentURI = event.params.contentURI
+    post.createdAt = event.params.timestamp.toString()
+    // post.appId = event.params.referenceModule.toString()
+    post.collectedBy = event.params.collectModule.toHexString()
+    post.save()
   }
 }
