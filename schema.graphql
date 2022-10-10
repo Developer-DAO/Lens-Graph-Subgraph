@@ -307,3 +307,29 @@ type Comment @entity{
   hasCollectedByMe: Boolean!
   mirrors:[ID!]!
 }
+
+type Owner @entity {
+  amount: Float!
+  address: String!
+}
+
+type NFTContent {
+  uri: String!
+  metaType: String!
+  animatedUrl: String
+}
+
+type NFT @entity {
+  contractName: String!
+  contractAddress: String!
+  symbol: String!
+  tokenId: String!
+  owners: [Owner!]!
+  name: String!
+  description: String!
+  contentURI: String!
+  originalContent: NFTContent!
+  chainId: ChainId!
+  collectionName: String!
+  ercType: String!
+}
