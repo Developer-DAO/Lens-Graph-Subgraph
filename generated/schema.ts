@@ -2356,22 +2356,38 @@ export class Post extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get profile(): string {
+  get profile(): string | null {
     let value = this.get("profile");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set profile(value: string) {
-    this.set("profile", Value.fromString(value));
+  set profile(value: string | null) {
+    if (!value) {
+      this.unset("profile");
+    } else {
+      this.set("profile", Value.fromString(<string>value));
+    }
   }
 
-  get stats(): string {
+  get stats(): string | null {
     let value = this.get("stats");
-    return value!.toString();
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set stats(value: string) {
-    this.set("stats", Value.fromString(value));
+  set stats(value: string | null) {
+    if (!value) {
+      this.unset("stats");
+    } else {
+      this.set("stats", Value.fromString(<string>value));
+    }
   }
 
   get metadata(): string | null {

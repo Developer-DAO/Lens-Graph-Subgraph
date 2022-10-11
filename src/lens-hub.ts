@@ -59,11 +59,12 @@ export function handlePostCreated(event: PostCreated): void {
   if(!post) {
     post = new Post(event.params.pubId.toString())
     post.id = event.params.pubId.toString()
-    post.metadata = event.params.contentURI
     post.onChainContentURI = event.params.contentURI
     post.createdAt = event.params.timestamp.toString()
+    post.profile = event.params.profileId.toString()
+    post.collectNftAddress = event.params.collectModule.toHexString()
+    // post.metadata = event.params.referenceModule
     // post.appId = event.params.referenceModule.toString()
-    post.collectedBy = event.params.collectModule.toHexString()
     post.save()
   }
 }
