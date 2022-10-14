@@ -43,7 +43,7 @@ export function handleProfileCreated(event: ProfileCreated): void {
     profile = new Profile(event.params.profileId.toString())
     profile.metadata = event.params.followNFTURI
     profile.handle = event.params.handle
-    profile.onwnedBy = event.params.creator.toHexString()
+    profile.ownedBy = event.params.creator.toHexString()
     profile.isDefault = true
     profile.isFollowedByMe = false
     profile.save()
