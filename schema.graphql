@@ -348,6 +348,10 @@ type NFT @entity {
 	ercType: String!
 }
 
+# Handles
+#12
+
+# Retrieved from https://graphiql-online.com/voyager-view
 type ReservedClaimableHandle @entity {
 	id: ID!
 	# Requires custom "Handle" scalar type
@@ -360,4 +364,27 @@ type ClaimableHandles @entity {
 	id: ID!
 	canClaimFreeTextHandle: Boolean!
 	claimableHandles: [ReservedClaimableHandle!]!
+}
+
+# Address
+#13
+
+type TransactionReceipt @entity {
+	id: ID!
+	to: String!
+	from: String!
+	contractAddress: String
+	transactionIndex: Int!
+	root: String
+	gasUsed: String!
+	logsBloom: String!
+	blockHash: String!
+	transactionHash: String!
+	blockNumber: Int!
+	confirmations: Int!
+	cumulativeGasUsed: String!
+	effectiveGasPrice: String!
+	byzantium: Boolean!
+	type: Int!
+	status: Int
 }

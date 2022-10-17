@@ -3109,3 +3109,197 @@ export class ClaimableHandles extends Entity {
     this.set("claimableHandles", Value.fromStringArray(value));
   }
 }
+
+export class TransactionReceipt extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save TransactionReceipt entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type TransactionReceipt must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("TransactionReceipt", id.toString(), this);
+    }
+  }
+
+  static load(id: string): TransactionReceipt | null {
+    return changetype<TransactionReceipt | null>(
+      store.get("TransactionReceipt", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get to(): string {
+    let value = this.get("to");
+    return value!.toString();
+  }
+
+  set to(value: string) {
+    this.set("to", Value.fromString(value));
+  }
+
+  get from(): string {
+    let value = this.get("from");
+    return value!.toString();
+  }
+
+  set from(value: string) {
+    this.set("from", Value.fromString(value));
+  }
+
+  get contractAddress(): string | null {
+    let value = this.get("contractAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set contractAddress(value: string | null) {
+    if (!value) {
+      this.unset("contractAddress");
+    } else {
+      this.set("contractAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get transactionIndex(): i32 {
+    let value = this.get("transactionIndex");
+    return value!.toI32();
+  }
+
+  set transactionIndex(value: i32) {
+    this.set("transactionIndex", Value.fromI32(value));
+  }
+
+  get root(): string | null {
+    let value = this.get("root");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set root(value: string | null) {
+    if (!value) {
+      this.unset("root");
+    } else {
+      this.set("root", Value.fromString(<string>value));
+    }
+  }
+
+  get gasUsed(): string {
+    let value = this.get("gasUsed");
+    return value!.toString();
+  }
+
+  set gasUsed(value: string) {
+    this.set("gasUsed", Value.fromString(value));
+  }
+
+  get logsBloom(): string {
+    let value = this.get("logsBloom");
+    return value!.toString();
+  }
+
+  set logsBloom(value: string) {
+    this.set("logsBloom", Value.fromString(value));
+  }
+
+  get blockHash(): string {
+    let value = this.get("blockHash");
+    return value!.toString();
+  }
+
+  set blockHash(value: string) {
+    this.set("blockHash", Value.fromString(value));
+  }
+
+  get transactionHash(): string {
+    let value = this.get("transactionHash");
+    return value!.toString();
+  }
+
+  set transactionHash(value: string) {
+    this.set("transactionHash", Value.fromString(value));
+  }
+
+  get blockNumber(): i32 {
+    let value = this.get("blockNumber");
+    return value!.toI32();
+  }
+
+  set blockNumber(value: i32) {
+    this.set("blockNumber", Value.fromI32(value));
+  }
+
+  get confirmations(): i32 {
+    let value = this.get("confirmations");
+    return value!.toI32();
+  }
+
+  set confirmations(value: i32) {
+    this.set("confirmations", Value.fromI32(value));
+  }
+
+  get cumulativeGasUsed(): string {
+    let value = this.get("cumulativeGasUsed");
+    return value!.toString();
+  }
+
+  set cumulativeGasUsed(value: string) {
+    this.set("cumulativeGasUsed", Value.fromString(value));
+  }
+
+  get effectiveGasPrice(): string {
+    let value = this.get("effectiveGasPrice");
+    return value!.toString();
+  }
+
+  set effectiveGasPrice(value: string) {
+    this.set("effectiveGasPrice", Value.fromString(value));
+  }
+
+  get byzantium(): boolean {
+    let value = this.get("byzantium");
+    return value!.toBoolean();
+  }
+
+  set byzantium(value: boolean) {
+    this.set("byzantium", Value.fromBoolean(value));
+  }
+
+  get type(): i32 {
+    let value = this.get("type");
+    return value!.toI32();
+  }
+
+  set type(value: i32) {
+    this.set("type", Value.fromI32(value));
+  }
+
+  get status(): i32 {
+    let value = this.get("status");
+    return value!.toI32();
+  }
+
+  set status(value: i32) {
+    this.set("status", Value.fromI32(value));
+  }
+}
