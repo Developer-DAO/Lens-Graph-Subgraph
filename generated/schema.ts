@@ -2569,6 +2569,77 @@ export class Comment extends Entity {
     this.set("profile", Value.fromString(value));
   }
 
+  get onChainContentURI(): string {
+    let value = this.get("onChainContentURI");
+    return value!.toString();
+  }
+
+  set onChainContentURI(value: string) {
+    this.set("onChainContentURI", Value.fromString(value));
+  }
+
+  get createdAt(): string {
+    let value = this.get("createdAt");
+    return value!.toString();
+  }
+
+  set createdAt(value: string) {
+    this.set("createdAt", Value.fromString(value));
+  }
+
+  get mirrors(): Array<string> {
+    let value = this.get("mirrors");
+    return value!.toStringArray();
+  }
+
+  set mirrors(value: Array<string>) {
+    this.set("mirrors", Value.fromStringArray(value));
+  }
+
+  get publication(): string {
+    let value = this.get("publication");
+    return value!.toString();
+  }
+
+  set publication(value: string) {
+    this.set("publication", Value.fromString(value));
+  }
+
+  get referenceModule(): string | null {
+    let value = this.get("referenceModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set referenceModule(value: string | null) {
+    if (!value) {
+      this.unset("referenceModule");
+    } else {
+      this.set("referenceModule", Value.fromString(<string>value));
+    }
+  }
+
+  get collectModule(): string {
+    let value = this.get("collectModule");
+    return value!.toString();
+  }
+
+  set collectModule(value: string) {
+    this.set("collectModule", Value.fromString(value));
+  }
+
+  get profilePointed(): string {
+    let value = this.get("profilePointed");
+    return value!.toString();
+  }
+
+  set profilePointed(value: string) {
+    this.set("profilePointed", Value.fromString(value));
+  }
+
   get stats(): string {
     let value = this.get("stats");
     return value!.toString();
@@ -2587,22 +2658,21 @@ export class Comment extends Entity {
     this.set("metadata", Value.fromString(value));
   }
 
-  get onChainContentURI(): string {
-    let value = this.get("onChainContentURI");
-    return value!.toString();
+  get firstComment(): string | null {
+    let value = this.get("firstComment");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
   }
 
-  set onChainContentURI(value: string) {
-    this.set("onChainContentURI", Value.fromString(value));
-  }
-
-  get createdAt(): string {
-    let value = this.get("createdAt");
-    return value!.toString();
-  }
-
-  set createdAt(value: string) {
-    this.set("createdAt", Value.fromString(value));
+  set firstComment(value: string | null) {
+    if (!value) {
+      this.unset("firstComment");
+    } else {
+      this.set("firstComment", Value.fromString(<string>value));
+    }
   }
 
   get appId(): string {
@@ -2632,8 +2702,8 @@ export class Comment extends Entity {
     this.set("collectNftAddress", Value.fromString(value));
   }
 
-  get firstComment(): string | null {
-    let value = this.get("firstComment");
+  get reaction(): string | null {
+    let value = this.get("reaction");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
@@ -2641,11 +2711,11 @@ export class Comment extends Entity {
     }
   }
 
-  set firstComment(value: string | null) {
+  set reaction(value: string | null) {
     if (!value) {
-      this.unset("firstComment");
+      this.unset("reaction");
     } else {
-      this.set("firstComment", Value.fromString(<string>value));
+      this.set("reaction", Value.fromString(<string>value));
     }
   }
 
@@ -2664,41 +2734,6 @@ export class Comment extends Entity {
     } else {
       this.set("collectedBy", Value.fromString(<string>value));
     }
-  }
-
-  get reaction(): string | null {
-    let value = this.get("reaction");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set reaction(value: string | null) {
-    if (!value) {
-      this.unset("reaction");
-    } else {
-      this.set("reaction", Value.fromString(<string>value));
-    }
-  }
-
-  get hasCollectedByMe(): boolean {
-    let value = this.get("hasCollectedByMe");
-    return value!.toBoolean();
-  }
-
-  set hasCollectedByMe(value: boolean) {
-    this.set("hasCollectedByMe", Value.fromBoolean(value));
-  }
-
-  get mirrors(): Array<string> {
-    let value = this.get("mirrors");
-    return value!.toStringArray();
-  }
-
-  set mirrors(value: Array<string>) {
-    this.set("mirrors", Value.fromStringArray(value));
   }
 }
 
@@ -2956,5 +2991,121 @@ export class NFT extends Entity {
 
   set ercType(value: string) {
     this.set("ercType", Value.fromString(value));
+  }
+}
+
+export class ReservedClaimableHandle extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(
+      id != null,
+      "Cannot save ReservedClaimableHandle entity without an ID"
+    );
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ReservedClaimableHandle must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ReservedClaimableHandle", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ReservedClaimableHandle | null {
+    return changetype<ReservedClaimableHandle | null>(
+      store.get("ReservedClaimableHandle", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get handle(): string {
+    let value = this.get("handle");
+    return value!.toString();
+  }
+
+  set handle(value: string) {
+    this.set("handle", Value.fromString(value));
+  }
+
+  get source(): string {
+    let value = this.get("source");
+    return value!.toString();
+  }
+
+  set source(value: string) {
+    this.set("source", Value.fromString(value));
+  }
+
+  get expiry(): string {
+    let value = this.get("expiry");
+    return value!.toString();
+  }
+
+  set expiry(value: string) {
+    this.set("expiry", Value.fromString(value));
+  }
+}
+
+export class ClaimableHandles extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save ClaimableHandles entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type ClaimableHandles must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("ClaimableHandles", id.toString(), this);
+    }
+  }
+
+  static load(id: string): ClaimableHandles | null {
+    return changetype<ClaimableHandles | null>(
+      store.get("ClaimableHandles", id)
+    );
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get canClaimFreeTextHandle(): boolean {
+    let value = this.get("canClaimFreeTextHandle");
+    return value!.toBoolean();
+  }
+
+  set canClaimFreeTextHandle(value: boolean) {
+    this.set("canClaimFreeTextHandle", Value.fromBoolean(value));
+  }
+
+  get claimableHandles(): Array<string> {
+    let value = this.get("claimableHandles");
+    return value!.toStringArray();
+  }
+
+  set claimableHandles(value: Array<string>) {
+    this.set("claimableHandles", Value.fromStringArray(value));
   }
 }
