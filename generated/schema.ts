@@ -2735,6 +2735,15 @@ export class Comment extends Entity {
       this.set("collectedBy", Value.fromString(<string>value));
     }
   }
+
+  get hasCollectedByMe(): boolean {
+    let value = this.get("hasCollectedByMe");
+    return value!.toBoolean();
+  }
+
+  set hasCollectedByMe(value: boolean) {
+    this.set("hasCollectedByMe", Value.fromBoolean(value));
+  }
 }
 
 export class Owner extends Entity {
