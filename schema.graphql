@@ -316,7 +316,7 @@ type Comment @entity {
 	#####
 
 	# Proposal to remove fields
-	# hasCollectedByMe: Boolean!
+	hasCollectedByMe: Boolean!
 }
 
 type Owner @entity {
