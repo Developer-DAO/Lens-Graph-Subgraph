@@ -179,8 +179,7 @@ type ReactionFieldResolverRequest @entity {
   profileId: BigInt
 }
 
-
-enum CollectModules {
+enum CollectModule {
   LimitedFeeCollectModule
   FeeCollectModule
   LimitedTimedFeeCollectModule
@@ -191,14 +190,14 @@ enum CollectModules {
 
 type FreeCollectModuleSettings @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
   followerOnly: Boolean!
 }
 
 type FeeCollectModuleSettings @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
   amount: ModuleFeeAmount!
   recipient: String!
@@ -208,7 +207,7 @@ type FeeCollectModuleSettings @entity {
 
 type LimitedFeeCollectModule @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
   collectLimit: String!
   amount: ModuleFeeAmount!
@@ -219,7 +218,7 @@ type LimitedFeeCollectModule @entity {
 
 type LimitedTimedFeeCollectModuleSettings @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
   collectLimit: String!
   amount: ModuleFeeAmount!
@@ -231,13 +230,13 @@ type LimitedTimedFeeCollectModuleSettings @entity {
 
 type RevertCollectModuleSettings @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
 }
 
 type TimedFeeCollectModuleSettings @entity {
   id: ID!
-  type: CollectModules!
+  type: CollectModule!
   contractAddress: String!
   amount: ModuleFeeAmount!
   recipient: String!
@@ -246,13 +245,13 @@ type TimedFeeCollectModuleSettings @entity {
   endTimestamp: String!
 }
 
-enum ReferenceModules {
+enum ReferenceModule {
   FollowOnlyReferenceModule
 }
 
 type FollowOnlyReferenceModuleSettings @entity {
   id: ID!
-  type: ReferenceModules!
+  type: ReferenceModule!
   contractAddress: String!
 }
 
@@ -286,21 +285,38 @@ type Post @entity {
   mirrors: [ID!]
 }
 
-type Comment @entity{
+# TODO: We need to make "Comment" extend from "Publication"
+type Comment @entity {
   id: ID!
   profile: Profile!
-  stats: PublicationStats!
-  metadata: MetadataOutput!
   onChainContentURI: String!
   createdAt: String!
+  mirrors: [ID!]!
+
+  # Publication that comment points to
+  publication: Post!
+  # Reference module settings for this comment
+  referenceModule: ReferenceModule
+  # Collect module settings for this comment
+  collectModule: CollectModule!
+  # Profile that comment points to (may be different than comment author)
+  profilePointed: Profile!
+
+  #####
+  # Retrieved from https://graphiql-online.com (Voyager view) - not sure if we need them
+  stats: PublicationStats!
+  metadata: MetadataOutput!
+
+  firstComment: Comment
   appId: String!
   hidden: Boolean!
   collectNftAddress: String!
-  firstComment:Comment
-  collectedBy:Wallet
-  reaction:ReactionTypes
+  reaction: ReactionTypes
+  collectedBy: Wallet
+  #####
+
+  # Proposal to remove fields
   hasCollectedByMe: Boolean!
-  mirrors:[ID!]!
 }
 
 type Owner @entity {
@@ -330,4 +346,45 @@ type NFT @entity {
   chainId: ID!
   collectionName: String!
   ercType: String!
+}
+
+# Handles
+#12
+
+# Retrieved from https://graphiql-online.com/voyager-view
+type ReservedClaimableHandle @entity {
+  id: ID!
+  # Requires custom "Handle" scalar type
+  handle: String!
+  source: String!
+  expiry: String!
+}
+
+type ClaimableHandles @entity {
+  id: ID!
+  canClaimFreeTextHandle: Boolean!
+  claimableHandles: [ReservedClaimableHandle!]!
+}
+
+# Address
+#13
+
+type TransactionReceipt @entity {
+  id: ID!
+  to: String!
+  from: String!
+  contractAddress: String
+  transactionIndex: Int!
+  root: String
+  gasUsed: String!
+  logsBloom: String!
+  blockHash: String!
+  transactionHash: String!
+  blockNumber: Int!
+  confirmations: Int!
+  cumulativeGasUsed: String!
+  effectiveGasPrice: String!
+  byzantium: Boolean!
+  type: Int!
+  status: Int
 }
