@@ -43,12 +43,15 @@ correct address for each respective network.
 
 Expect the subgraph to take ~10 hours to ingest all the events when connected to infura for mainnet
 
+**Note: Switch to the `feat/index-profile` branch for the most updated code, to deploy the subgraph and to make the contributions.**
+
 **How to deploy**
 
 1. Clone the repository
 2. Add a Subgraph in https://thegraph.com/hosted-service/
-3. `yarn install` into the subgraph directory
-4. `yarn deploy`
+3. Follow the steps mentioned in the subgraph dashboard to deploy the subgraph.
+
+(Refer to [this](https://dev.to/edge-and-node/building-graphql-apis-on-ethereum-4poa) to know in detail about how to deploy a subgraph)
 
 **Link to the hosted service subgraph :**
 https://thegraph.com/hosted-service/subgraph/rtomas/lens-subgraph
