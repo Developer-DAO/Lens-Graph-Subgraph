@@ -253,6 +253,7 @@ type Profile @entity {
 
 	followNftUri: String
 
+	# TODO: Combine to single superclass "Publication"
 	posts: [Post!]!
 	comments: [Comment!]!
 	mirrors: [Mirror!]!
@@ -270,6 +271,9 @@ type Mirror @entity {
 
 	profilePointed: Profile!
 	publicationPointed: Post!
+
+	# Address of user who collected
+	collectedBy: String
 }
 
 type Post @entity {
@@ -286,6 +290,9 @@ type Post @entity {
 	referenceModuleReturnData: Bytes
 
 	createdAt: String!
+
+	# Address of user who collected
+	collectedBy: String
 
 	mirrors: [ID!]
 }
@@ -306,6 +313,9 @@ type Comment @entity {
 	collectModule: CollectModule!
 	# Profile that comment points to (may be different than comment author)
 	profilePointed: Profile!
+
+	# Address of user who collected
+	collectedBy: String
 }
 
 type Owner @entity {

@@ -2179,6 +2179,23 @@ export class Mirror extends Entity {
   set publicationPointed(value: string) {
     this.set("publicationPointed", Value.fromString(value));
   }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
+  }
 }
 
 export class Post extends Entity {
@@ -2305,6 +2322,23 @@ export class Post extends Entity {
 
   set createdAt(value: string) {
     this.set("createdAt", Value.fromString(value));
+  }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
   }
 
   get mirrors(): Array<string> | null {
@@ -2434,6 +2468,23 @@ export class Comment extends Entity {
 
   set profilePointed(value: string) {
     this.set("profilePointed", Value.fromString(value));
+  }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
   }
 }
 

@@ -2,6 +2,7 @@ import { log } from "@graphprotocol/graph-ts";
 import {
 	Approval as ApprovalEvent,
 	ApprovalForAll as ApprovalForAllEvent,
+	Collected,
 	CommentCreated,
 	MirrorCreated,
 	PostCreated,
@@ -146,5 +147,28 @@ export function handleMirrorCreated(event: MirrorCreated): void {
 		comment.mirrors = (comment.mirrors ?? []).concat([
 			event.params.pubId.toString(),
 		]);
+	}
+}
+
+// https://docs.lens.xyz/docs/events#collected
+export function handleCollected(event: Collected): void {
+	// TODO: Unsure to use "pubId" or "rootPubId" here
+
+	let post = Post.load(event.params.pubId.toString());
+	if (post) {
+		post.collectedBy = event.params.collector.toHexString();
+		post.save();
+	}
+
+	let comment = Comment.load(event.params.pubId.toString());
+	if (comment) {
+		comment.collectedBy = event.params.collector.toHexString();
+		comment.save();
+	}
+
+	let mirror = Mirror.load(event.params.pubId.toString());
+	if (mirror) {
+		mirror.collectedBy = event.params.collector.toHexString();
+		mirror.save();
 	}
 }
