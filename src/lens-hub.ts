@@ -3,6 +3,7 @@ import {
 	Approval as ApprovalEvent,
 	ApprovalForAll as ApprovalForAllEvent,
 	CommentCreated,
+	MirrorCreated,
 	PostCreated,
 	ProfileCreated,
 	Transfer as TransferEvent,
@@ -11,6 +12,7 @@ import {
 	Approval,
 	ApprovalForAll,
 	Comment,
+	Mirror,
 	Post,
 	Profile,
 	Transfer,
@@ -52,11 +54,19 @@ export function handleProfileCreated(event: ProfileCreated): void {
 
 	if (!profile) {
 		profile = new Profile(event.params.profileId.toString());
-		profile.metadata = event.params.followNFTURI;
-		profile.handle = event.params.handle;
-		profile.onwnedBy = event.params.creator.toHexString();
-		profile.isDefault = true;
-		profile.isFollowedByMe = false;
+		profile.handle = event.params.handle.toString();
+		profile.creator = event.params.creator.toHexString();
+		profile.mintedTo = event.params.to.toHexString();
+		profile.picture = event.params.imageURI.toString();
+
+		profile.createdAt = event.params.timestamp.toString();
+
+		// Newly set follow module, can be zero address
+		profile.followModule = event.params.followModule.toHexString();
+		profile.followModuleReturnData = event.params.followModuleReturnData;
+
+		profile.followNftUri = event.params.followNFTURI;
+
 		profile.save();
 	}
 }
@@ -67,13 +77,23 @@ export function handlePostCreated(event: PostCreated): void {
 	if (!post) {
 		post = new Post(event.params.pubId.toString());
 		post.id = event.params.pubId.toString();
-		post.onChainContentURI = event.params.contentURI;
+		post.contentUri = event.params.contentURI;
 		post.createdAt = event.params.timestamp.toString();
 		post.profile = event.params.profileId.toString();
-		post.collectNftAddress = event.params.collectModule.toHexString();
-		// post.metadata = event.params.referenceModule
-		// post.appId = event.params.referenceModule.toString()
+
+		post.collectModule = event.params.collectModule.toHexString();
+		post.collectModuleReturnData = event.params.collectModuleReturnData;
+
+		post.referenceModule = event.params.referenceModule.toHexString();
+		post.referenceModuleReturnData = event.params.referenceModuleReturnData;
+
 		post.save();
+	}
+
+	let profile = Profile.load(event.params.profileId.toString());
+	if (profile) {
+		profile.posts = (profile.posts ?? []).concat([post.id]);
+		profile.save();
 	}
 }
 
@@ -91,5 +111,40 @@ export function handleCommentCreated(event: CommentCreated): void {
 		comment.publication = event.params.pubIdPointed.toString();
 		comment.profilePointed = event.params.profileIdPointed.toString();
 		comment.save();
+	}
+
+	let profile = Profile.load(event.params.profileId.toString());
+	if (profile) {
+		profile.comments = (profile.comments ?? []).concat([comment.id]);
+		profile.save();
+	}
+}
+
+export function handleMirrorCreated(event: MirrorCreated): void {
+	let mirror = Mirror.load(event.params.pubId.toString());
+
+	if (!mirror) {
+		mirror = new Mirror(event.params.pubId.toString());
+		mirror.profile = event.params.profileId.toString();
+		mirror.profilePointed = event.params.profileIdPointed.toString();
+		mirror.createdAt = event.params.timestamp.toString();
+
+		mirror.referenceModule = event.params.referenceModule.toString();
+		mirror.referenceModuleReturnData = event.params.referenceModuleReturnData;
+		mirror.publicationPointed = event.params.pubIdPointed.toString();
+		mirror.save();
+	}
+
+	// Add publication mirrors
+	let post = Post.load(event.params.pubIdPointed.toString());
+	if (post) {
+		post.mirrors = (post.mirrors ?? []).concat([event.params.pubId.toString()]);
+	}
+
+	let comment = Comment.load(event.params.pubIdPointed.toString());
+	if (comment) {
+		comment.mirrors = (comment.mirrors ?? []).concat([
+			event.params.pubId.toString(),
+		]);
 	}
 }
