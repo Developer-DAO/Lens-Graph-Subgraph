@@ -1,10 +1,3 @@
-type ExampleEntity @entity {
-  id: ID!
-  count: BigInt!
-  previousAdmin: Bytes! # address
-  newAdmin: Bytes! # address
-}
-
 type Approval @entity {
   id: ID!
   owner: Bytes! # address
@@ -129,12 +122,12 @@ type Profile @entity {
   coverPicture: ProfileMedia
   onwnedBy: String!
   dispatcher: Dispatcher
-  stats: ProfileStats!
+  stats: ProfileStats
   followModule: FollowModule
-  isDefault: Boolean!
+  isDefault: Boolean
   attributes: [Attribute!]
-  isFollowedByMe: Boolean!
-  isFollowingMe: Boolean!
+  isFollowedByMe: Boolean
+  isFollowingMe: Boolean
 }
 
 enum ReactionTypes {
@@ -181,20 +174,11 @@ type MetadataOutput @entity {
   attributes: [MetadataAttributeOutput!]!
 }
 
-union MainPostReference = Post | Mirror
-
 type ReactionFieldResolverRequest @entity {
   id: ID!
   profileId: BigInt
 }
 
-union CollectModule =
-    FreeCollectModuleSettings
-  | FeeCollectModuleSettings
-  | LimitedFeeCollectModuleSettings
-  | LimitedTimedFeeCollectModuleSettings
-  | RevertCollectModuleSettings
-  | TimedFeeCollectModuleSettings
 
 enum CollectModules {
   LimitedFeeCollectModule
@@ -262,10 +246,6 @@ type TimedFeeCollectModuleSettings @entity {
   endTimestamp: String!
 }
 
-union MirrorablePublication = Post
-
-union ReferenceModule = FollowOnlyReferenceModuleSettings
-
 enum ReferenceModules {
   FollowOnlyReferenceModule
 }
@@ -292,18 +272,62 @@ type Mirror @entity {
 
 type Post @entity {
   id: ID!
+  profile: Profile
+  stats: PublicationStats
+  metadata: MetadataOutput
+  onChainContentURI: String!
+  createdAt: String!
+  appId: String
+  hidden: Boolean
+  collectNftAddress: String
+  collectedBy: Wallet
+  reaction: ReactionTypes
+  hasCollectedByMe: Boolean
+  mirrors: [ID!]
+}
+
+type Comment @entity{
+  id: ID!
   profile: Profile!
   stats: PublicationStats!
   metadata: MetadataOutput!
   onChainContentURI: String!
   createdAt: String!
-  appId: String
+  appId: String!
   hidden: Boolean!
-  collectNftAddress: String
-  collectedBy: Wallet
-  reaction: ReactionTypes
+  collectNftAddress: String!
+  firstComment:Comment
+  collectedBy:Wallet
+  reaction:ReactionTypes
   hasCollectedByMe: Boolean!
-  mirrors: [ID!]!
+  mirrors:[ID!]!
 }
 
-union Publication = Post | Mirror
+type Owner @entity {
+  id: ID!
+  amount: BigDecimal!
+  address: String!
+}
+
+type NFTContent @entity {
+  id: ID!
+  uri: String!
+  metaType: String!
+  animatedUrl: String
+}
+
+type NFT @entity {
+  id: ID!
+  contractName: String!
+  contractAddress: String!
+  symbol: String!
+  tokenId: String!
+  owners: [Owner!]!
+  name: String!
+  description: String!
+  contentURI: String!
+  originalContent: NFTContent!
+  chainId: ID!
+  collectionName: String!
+  ercType: String!
+}
