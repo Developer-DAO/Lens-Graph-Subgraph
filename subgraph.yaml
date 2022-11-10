@@ -31,10 +31,10 @@ dataSources:
           handler: handleProfileCreated
         - event: PostCreated(indexed uint256,indexed uint256,string,address,bytes,address,bytes,uint256)
           handler: handlePostCreated
-        - event: CommentCreated(indexed uint256, indexed uint256, string, uint256, uint256, address, bytes, address, bytes, uint256);
+        - event: CommentCreated(indexed uint256,indexed uint256,string,uint256,uint256,bytes,address,bytes,address,bytes,uint256)
           handler: handleCommentCreated
-        - event: MirrorCreated(indexed uint256, indexed uint256, uint256, uint256, address, bytes, uint256)
+        - event: MirrorCreated(indexed uint256,indexed uint256,uint256,uint256,bytes,address,bytes,uint256)
           handler: handleMirrorCreated
-        - event: Collected(indexed address, indexed uint256, indexed uint256, uint256, uint256, uint256)
+        - event: Collected(indexed address,indexed uint256,indexed uint256,uint256,uint256,uint256)
           handler: handleCollected
       file: ./src/lens-hub.ts
