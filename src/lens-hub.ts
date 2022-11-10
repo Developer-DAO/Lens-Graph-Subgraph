@@ -1,3 +1,4 @@
+import { log } from "@graphprotocol/graph-ts";
 import {
   Approval as ApprovalEvent,
   ApprovalForAll as ApprovalForAllEvent,
@@ -38,6 +39,7 @@ export function handleTransfer(event: TransferEvent): void {
 
 export function handleProfileCreated(event: ProfileCreated): void {
   let profile = Profile.load(event.params.profileId.toString())
+  log.info("Trigger Fired", [])
 
   if(!profile) {
     profile = new Profile(event.params.profileId.toString())
