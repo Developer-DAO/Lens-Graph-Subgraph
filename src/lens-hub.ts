@@ -165,8 +165,7 @@ export function handleMirrorCreated(event: MirrorCreated): void {
 
 // https://docs.lens.xyz/docs/events#collected
 export function handleCollected(event: Collected): void {
-	// TODO: Unsure to use "pubId" or "rootPubId" here
-
+	// Revisit "pubId" to maybe use "rootPubId" instead
 	let post = Post.load(event.params.pubId.toString());
 	if (post) {
 		post.collectedBy = event.params.collector.toHexString();
