@@ -111,25 +111,6 @@ type Attribute @entity {
   value: String!
 }
 
-type Profile @entity {
-  id: ID!
-  name: String
-  bio: String
-  followNftAddress: String
-  metadata: String
-  handle: String!
-  picture: ProfileMedia
-  coverPicture: ProfileMedia
-  onwnedBy: String!
-  dispatcher: Dispatcher
-  stats: ProfileStats
-  followModule: FollowModule
-  isDefault: Boolean
-  attributes: [Attribute!]
-  isFollowedByMe: Boolean
-  isFollowingMe: Boolean
-}
-
 enum ReactionTypes {
   UPVOTE
   DOWNVOTE
@@ -255,13 +236,68 @@ type FollowOnlyReferenceModuleSettings @entity {
   contractAddress: String!
 }
 
+# https://docs.lens.xyz/docs/events#profilecreated
+type Profile @entity {
+  id: ID!
+
+  createdAt: String!
+
+  # Wallet address
+  creator: String!
+  mintedTo: String!
+  handle: String!
+  picture: ProfileMedia
+
+  followModule: FollowModule
+  followModuleReturnData: Bytes
+
+  followNftUri: String
+
+  # TODO: Combine to single superclass "Publication"
+  posts: [Post!]!
+  comments: [Comment!]!
+  mirrors: [Mirror!]!
+
+  # Additional fields that we want to remove
+  # TODO: Refactor & remove
+  name: String
+  bio: String
+  followNftAddress: String
+  metadata: String
+  handle: String!
+  picture: ProfileMedia
+  coverPicture: ProfileMedia
+  ownedBy: String!
+  dispatcher: Dispatcher
+  stats: ProfileStats
+  followModule: FollowModule
+  isDefault: Boolean
+  attributes: [Attribute!]
+  isFollowedByMe: Boolean
+  isFollowingMe: Boolean
+}
+
+# Mirrors should extend "Post"
+# https://docs.lens.xyz/docs/mirror
 type Mirror @entity {
   id: ID!
   profile: Profile!
+  createdAt: String!
+
+  referenceModule: ReferenceModule!
+  referenceModuleReturnData: Bytes!
+
+  profilePointed: Profile!
+  publicationPointed: Post!
+
+  # Address of user who collected
+  collectedBy: String
+
+  # Additional fields that we want to remove
+  # TODO: Refactor & remove
   stats: PublicationStats!
   metadata: MetadataOutput!
   onChainContentURI: String!
-  createdAt: String!
   appId: BigInt
   hidden: Boolean!
   collectNftAddress: String
@@ -271,18 +307,34 @@ type Mirror @entity {
 
 type Post @entity {
   id: ID!
-  profile: Profile
-  stats: PublicationStats
-  metadata: MetadataOutput
+  profile: Profile!
+
   onChainContentURI: String!
+
+  # Address
+  collectModule: CollectModule
+  collectModuleReturnData: Bytes
+
+  referenceModule: ReferenceModule
+  referenceModuleReturnData: Bytes
+
   createdAt: String!
+
+  # Address of user who collected
+  collectedBy: String
+
+  mirrors: [ID!]
+
+  # Additional fields that we want to remove
+  # TODO: Refactor & remove
   appId: String
   hidden: Boolean
   collectNftAddress: String
   collectedBy: Wallet
   reaction: ReactionTypes
   hasCollectedByMe: Boolean
-  mirrors: [ID!]
+  stats: PublicationStats
+  metadata: MetadataOutput
 }
 
 # TODO: We need to make "Comment" extend from "Publication"
@@ -302,21 +354,8 @@ type Comment @entity {
   # Profile that comment points to (may be different than comment author)
   profilePointed: Profile!
 
-  #####
-  # Retrieved from https://graphiql-online.com (Voyager view) - not sure if we need them
-  stats: PublicationStats!
-  metadata: MetadataOutput!
-
-  firstComment: Comment
-  appId: String!
-  hidden: Boolean!
-  collectNftAddress: String!
-  reaction: ReactionTypes
-  collectedBy: Wallet
-  #####
-
-  # Proposal to remove fields
-  hasCollectedByMe: Boolean!
+  # Address of user who collected
+  collectedBy: String
 }
 
 type Owner @entity {

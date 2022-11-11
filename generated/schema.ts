@@ -952,253 +952,6 @@ export class Attribute extends Entity {
   }
 }
 
-export class Profile extends Entity {
-  constructor(id: string) {
-    super();
-    this.set("id", Value.fromString(id));
-  }
-
-  save(): void {
-    let id = this.get("id");
-    assert(id != null, "Cannot save Profile entity without an ID");
-    if (id) {
-      assert(
-        id.kind == ValueKind.STRING,
-        `Entities of type Profile must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
-      );
-      store.set("Profile", id.toString(), this);
-    }
-  }
-
-  static load(id: string): Profile | null {
-    return changetype<Profile | null>(store.get("Profile", id));
-  }
-
-  get id(): string {
-    let value = this.get("id");
-    return value!.toString();
-  }
-
-  set id(value: string) {
-    this.set("id", Value.fromString(value));
-  }
-
-  get name(): string | null {
-    let value = this.get("name");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set name(value: string | null) {
-    if (!value) {
-      this.unset("name");
-    } else {
-      this.set("name", Value.fromString(<string>value));
-    }
-  }
-
-  get bio(): string | null {
-    let value = this.get("bio");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set bio(value: string | null) {
-    if (!value) {
-      this.unset("bio");
-    } else {
-      this.set("bio", Value.fromString(<string>value));
-    }
-  }
-
-  get followNftAddress(): string | null {
-    let value = this.get("followNftAddress");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set followNftAddress(value: string | null) {
-    if (!value) {
-      this.unset("followNftAddress");
-    } else {
-      this.set("followNftAddress", Value.fromString(<string>value));
-    }
-  }
-
-  get metadata(): string | null {
-    let value = this.get("metadata");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set metadata(value: string | null) {
-    if (!value) {
-      this.unset("metadata");
-    } else {
-      this.set("metadata", Value.fromString(<string>value));
-    }
-  }
-
-  get handle(): string {
-    let value = this.get("handle");
-    return value!.toString();
-  }
-
-  set handle(value: string) {
-    this.set("handle", Value.fromString(value));
-  }
-
-  get picture(): string | null {
-    let value = this.get("picture");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set picture(value: string | null) {
-    if (!value) {
-      this.unset("picture");
-    } else {
-      this.set("picture", Value.fromString(<string>value));
-    }
-  }
-
-  get coverPicture(): string | null {
-    let value = this.get("coverPicture");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set coverPicture(value: string | null) {
-    if (!value) {
-      this.unset("coverPicture");
-    } else {
-      this.set("coverPicture", Value.fromString(<string>value));
-    }
-  }
-
-  get onwnedBy(): string {
-    let value = this.get("onwnedBy");
-    return value!.toString();
-  }
-
-  set onwnedBy(value: string) {
-    this.set("onwnedBy", Value.fromString(value));
-  }
-
-  get dispatcher(): string | null {
-    let value = this.get("dispatcher");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set dispatcher(value: string | null) {
-    if (!value) {
-      this.unset("dispatcher");
-    } else {
-      this.set("dispatcher", Value.fromString(<string>value));
-    }
-  }
-
-  get stats(): string | null {
-    let value = this.get("stats");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set stats(value: string | null) {
-    if (!value) {
-      this.unset("stats");
-    } else {
-      this.set("stats", Value.fromString(<string>value));
-    }
-  }
-
-  get followModule(): string | null {
-    let value = this.get("followModule");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set followModule(value: string | null) {
-    if (!value) {
-      this.unset("followModule");
-    } else {
-      this.set("followModule", Value.fromString(<string>value));
-    }
-  }
-
-  get isDefault(): boolean {
-    let value = this.get("isDefault");
-    return value!.toBoolean();
-  }
-
-  set isDefault(value: boolean) {
-    this.set("isDefault", Value.fromBoolean(value));
-  }
-
-  get attributes(): Array<string> | null {
-    let value = this.get("attributes");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
-  }
-
-  set attributes(value: Array<string> | null) {
-    if (!value) {
-      this.unset("attributes");
-    } else {
-      this.set("attributes", Value.fromStringArray(<Array<string>>value));
-    }
-  }
-
-  get isFollowedByMe(): boolean {
-    let value = this.get("isFollowedByMe");
-    return value!.toBoolean();
-  }
-
-  set isFollowedByMe(value: boolean) {
-    this.set("isFollowedByMe", Value.fromBoolean(value));
-  }
-
-  get isFollowingMe(): boolean {
-    let value = this.get("isFollowingMe");
-    return value!.toBoolean();
-  }
-
-  set isFollowingMe(value: boolean) {
-    this.set("isFollowingMe", Value.fromBoolean(value));
-  }
-}
-
 export class PublicationStats extends Entity {
   constructor(id: string) {
     super();
@@ -2179,6 +1932,384 @@ export class FollowOnlyReferenceModuleSettings extends Entity {
   }
 }
 
+export class Profile extends Entity {
+  constructor(id: string) {
+    super();
+    this.set("id", Value.fromString(id));
+  }
+
+  save(): void {
+    let id = this.get("id");
+    assert(id != null, "Cannot save Profile entity without an ID");
+    if (id) {
+      assert(
+        id.kind == ValueKind.STRING,
+        `Entities of type Profile must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+      );
+      store.set("Profile", id.toString(), this);
+    }
+  }
+
+  static load(id: string): Profile | null {
+    return changetype<Profile | null>(store.get("Profile", id));
+  }
+
+  get id(): string {
+    let value = this.get("id");
+    return value!.toString();
+  }
+
+  set id(value: string) {
+    this.set("id", Value.fromString(value));
+  }
+
+  get createdAt(): string {
+    let value = this.get("createdAt");
+    return value!.toString();
+  }
+
+  set createdAt(value: string) {
+    this.set("createdAt", Value.fromString(value));
+  }
+
+  get creator(): string {
+    let value = this.get("creator");
+    return value!.toString();
+  }
+
+  set creator(value: string) {
+    this.set("creator", Value.fromString(value));
+  }
+
+  get mintedTo(): string {
+    let value = this.get("mintedTo");
+    return value!.toString();
+  }
+
+  set mintedTo(value: string) {
+    this.set("mintedTo", Value.fromString(value));
+  }
+
+  get handle(): string {
+    let value = this.get("handle");
+    return value!.toString();
+  }
+
+  set handle(value: string) {
+    this.set("handle", Value.fromString(value));
+  }
+
+  get picture(): string | null {
+    let value = this.get("picture");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set picture(value: string | null) {
+    if (!value) {
+      this.unset("picture");
+    } else {
+      this.set("picture", Value.fromString(<string>value));
+    }
+  }
+
+  get followModule(): string | null {
+    let value = this.get("followModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followModule(value: string | null) {
+    if (!value) {
+      this.unset("followModule");
+    } else {
+      this.set("followModule", Value.fromString(<string>value));
+    }
+  }
+
+  get followModuleReturnData(): Bytes | null {
+    let value = this.get("followModuleReturnData");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set followModuleReturnData(value: Bytes | null) {
+    if (!value) {
+      this.unset("followModuleReturnData");
+    } else {
+      this.set("followModuleReturnData", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get followNftUri(): string | null {
+    let value = this.get("followNftUri");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followNftUri(value: string | null) {
+    if (!value) {
+      this.unset("followNftUri");
+    } else {
+      this.set("followNftUri", Value.fromString(<string>value));
+    }
+  }
+
+  get posts(): Array<string> {
+    let value = this.get("posts");
+    return value!.toStringArray();
+  }
+
+  set posts(value: Array<string>) {
+    this.set("posts", Value.fromStringArray(value));
+  }
+
+  get comments(): Array<string> {
+    let value = this.get("comments");
+    return value!.toStringArray();
+  }
+
+  set comments(value: Array<string>) {
+    this.set("comments", Value.fromStringArray(value));
+  }
+
+  get mirrors(): Array<string> {
+    let value = this.get("mirrors");
+    return value!.toStringArray();
+  }
+
+  set mirrors(value: Array<string>) {
+    this.set("mirrors", Value.fromStringArray(value));
+  }
+
+  get name(): string | null {
+    let value = this.get("name");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set name(value: string | null) {
+    if (!value) {
+      this.unset("name");
+    } else {
+      this.set("name", Value.fromString(<string>value));
+    }
+  }
+
+  get bio(): string | null {
+    let value = this.get("bio");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set bio(value: string | null) {
+    if (!value) {
+      this.unset("bio");
+    } else {
+      this.set("bio", Value.fromString(<string>value));
+    }
+  }
+
+  get followNftAddress(): string | null {
+    let value = this.get("followNftAddress");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followNftAddress(value: string | null) {
+    if (!value) {
+      this.unset("followNftAddress");
+    } else {
+      this.set("followNftAddress", Value.fromString(<string>value));
+    }
+  }
+
+  get metadata(): string | null {
+    let value = this.get("metadata");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set metadata(value: string | null) {
+    if (!value) {
+      this.unset("metadata");
+    } else {
+      this.set("metadata", Value.fromString(<string>value));
+    }
+  }
+
+  get handle(): string {
+    let value = this.get("handle");
+    return value!.toString();
+  }
+
+  set handle(value: string) {
+    this.set("handle", Value.fromString(value));
+  }
+
+  get picture(): string | null {
+    let value = this.get("picture");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set picture(value: string | null) {
+    if (!value) {
+      this.unset("picture");
+    } else {
+      this.set("picture", Value.fromString(<string>value));
+    }
+  }
+
+  get coverPicture(): string | null {
+    let value = this.get("coverPicture");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set coverPicture(value: string | null) {
+    if (!value) {
+      this.unset("coverPicture");
+    } else {
+      this.set("coverPicture", Value.fromString(<string>value));
+    }
+  }
+
+  get ownedBy(): string {
+    let value = this.get("ownedBy");
+    return value!.toString();
+  }
+
+  set ownedBy(value: string) {
+    this.set("ownedBy", Value.fromString(value));
+  }
+
+  get dispatcher(): string | null {
+    let value = this.get("dispatcher");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set dispatcher(value: string | null) {
+    if (!value) {
+      this.unset("dispatcher");
+    } else {
+      this.set("dispatcher", Value.fromString(<string>value));
+    }
+  }
+
+  get stats(): string | null {
+    let value = this.get("stats");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set stats(value: string | null) {
+    if (!value) {
+      this.unset("stats");
+    } else {
+      this.set("stats", Value.fromString(<string>value));
+    }
+  }
+
+  get followModule(): string | null {
+    let value = this.get("followModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set followModule(value: string | null) {
+    if (!value) {
+      this.unset("followModule");
+    } else {
+      this.set("followModule", Value.fromString(<string>value));
+    }
+  }
+
+  get isDefault(): boolean {
+    let value = this.get("isDefault");
+    return value!.toBoolean();
+  }
+
+  set isDefault(value: boolean) {
+    this.set("isDefault", Value.fromBoolean(value));
+  }
+
+  get attributes(): Array<string> | null {
+    let value = this.get("attributes");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set attributes(value: Array<string> | null) {
+    if (!value) {
+      this.unset("attributes");
+    } else {
+      this.set("attributes", Value.fromStringArray(<Array<string>>value));
+    }
+  }
+
+  get isFollowedByMe(): boolean {
+    let value = this.get("isFollowedByMe");
+    return value!.toBoolean();
+  }
+
+  set isFollowedByMe(value: boolean) {
+    this.set("isFollowedByMe", Value.fromBoolean(value));
+  }
+
+  get isFollowingMe(): boolean {
+    let value = this.get("isFollowingMe");
+    return value!.toBoolean();
+  }
+
+  set isFollowingMe(value: boolean) {
+    this.set("isFollowingMe", Value.fromBoolean(value));
+  }
+}
+
 export class Mirror extends Entity {
   constructor(id: string) {
     super();
@@ -2219,6 +2350,68 @@ export class Mirror extends Entity {
     this.set("profile", Value.fromString(value));
   }
 
+  get createdAt(): string {
+    let value = this.get("createdAt");
+    return value!.toString();
+  }
+
+  set createdAt(value: string) {
+    this.set("createdAt", Value.fromString(value));
+  }
+
+  get referenceModule(): string {
+    let value = this.get("referenceModule");
+    return value!.toString();
+  }
+
+  set referenceModule(value: string) {
+    this.set("referenceModule", Value.fromString(value));
+  }
+
+  get referenceModuleReturnData(): Bytes {
+    let value = this.get("referenceModuleReturnData");
+    return value!.toBytes();
+  }
+
+  set referenceModuleReturnData(value: Bytes) {
+    this.set("referenceModuleReturnData", Value.fromBytes(value));
+  }
+
+  get profilePointed(): string {
+    let value = this.get("profilePointed");
+    return value!.toString();
+  }
+
+  set profilePointed(value: string) {
+    this.set("profilePointed", Value.fromString(value));
+  }
+
+  get publicationPointed(): string {
+    let value = this.get("publicationPointed");
+    return value!.toString();
+  }
+
+  set publicationPointed(value: string) {
+    this.set("publicationPointed", Value.fromString(value));
+  }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
+  }
+
   get stats(): string {
     let value = this.get("stats");
     return value!.toString();
@@ -2244,15 +2437,6 @@ export class Mirror extends Entity {
 
   set onChainContentURI(value: string) {
     this.set("onChainContentURI", Value.fromString(value));
-  }
-
-  get createdAt(): string {
-    let value = this.get("createdAt");
-    return value!.toString();
-  }
-
-  set createdAt(value: string) {
-    this.set("createdAt", Value.fromString(value));
   }
 
   get appId(): BigInt | null {
@@ -2356,55 +2540,13 @@ export class Post extends Entity {
     this.set("id", Value.fromString(value));
   }
 
-  get profile(): string | null {
+  get profile(): string {
     let value = this.get("profile");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
+    return value!.toString();
   }
 
-  set profile(value: string | null) {
-    if (!value) {
-      this.unset("profile");
-    } else {
-      this.set("profile", Value.fromString(<string>value));
-    }
-  }
-
-  get stats(): string | null {
-    let value = this.get("stats");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set stats(value: string | null) {
-    if (!value) {
-      this.unset("stats");
-    } else {
-      this.set("stats", Value.fromString(<string>value));
-    }
-  }
-
-  get metadata(): string | null {
-    let value = this.get("metadata");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set metadata(value: string | null) {
-    if (!value) {
-      this.unset("metadata");
-    } else {
-      this.set("metadata", Value.fromString(<string>value));
-    }
+  set profile(value: string) {
+    this.set("profile", Value.fromString(value));
   }
 
   get onChainContentURI(): string {
@@ -2416,6 +2558,74 @@ export class Post extends Entity {
     this.set("onChainContentURI", Value.fromString(value));
   }
 
+  get collectModule(): string | null {
+    let value = this.get("collectModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectModule(value: string | null) {
+    if (!value) {
+      this.unset("collectModule");
+    } else {
+      this.set("collectModule", Value.fromString(<string>value));
+    }
+  }
+
+  get collectModuleReturnData(): Bytes | null {
+    let value = this.get("collectModuleReturnData");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set collectModuleReturnData(value: Bytes | null) {
+    if (!value) {
+      this.unset("collectModuleReturnData");
+    } else {
+      this.set("collectModuleReturnData", Value.fromBytes(<Bytes>value));
+    }
+  }
+
+  get referenceModule(): string | null {
+    let value = this.get("referenceModule");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set referenceModule(value: string | null) {
+    if (!value) {
+      this.unset("referenceModule");
+    } else {
+      this.set("referenceModule", Value.fromString(<string>value));
+    }
+  }
+
+  get referenceModuleReturnData(): Bytes | null {
+    let value = this.get("referenceModuleReturnData");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toBytes();
+    }
+  }
+
+  set referenceModuleReturnData(value: Bytes | null) {
+    if (!value) {
+      this.unset("referenceModuleReturnData");
+    } else {
+      this.set("referenceModuleReturnData", Value.fromBytes(<Bytes>value));
+    }
+  }
+
   get createdAt(): string {
     let value = this.get("createdAt");
     return value!.toString();
@@ -2423,6 +2633,40 @@ export class Post extends Entity {
 
   set createdAt(value: string) {
     this.set("createdAt", Value.fromString(value));
+  }
+
+  get collectedBy(): string | null {
+    let value = this.get("collectedBy");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set collectedBy(value: string | null) {
+    if (!value) {
+      this.unset("collectedBy");
+    } else {
+      this.set("collectedBy", Value.fromString(<string>value));
+    }
+  }
+
+  get mirrors(): Array<string> | null {
+    let value = this.get("mirrors");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toStringArray();
+    }
+  }
+
+  set mirrors(value: Array<string> | null) {
+    if (!value) {
+      this.unset("mirrors");
+    } else {
+      this.set("mirrors", Value.fromStringArray(<Array<string>>value));
+    }
   }
 
   get appId(): string | null {
@@ -2511,20 +2755,37 @@ export class Post extends Entity {
     this.set("hasCollectedByMe", Value.fromBoolean(value));
   }
 
-  get mirrors(): Array<string> | null {
-    let value = this.get("mirrors");
+  get stats(): string | null {
+    let value = this.get("stats");
     if (!value || value.kind == ValueKind.NULL) {
       return null;
     } else {
-      return value.toStringArray();
+      return value.toString();
     }
   }
 
-  set mirrors(value: Array<string> | null) {
+  set stats(value: string | null) {
     if (!value) {
-      this.unset("mirrors");
+      this.unset("stats");
     } else {
-      this.set("mirrors", Value.fromStringArray(<Array<string>>value));
+      this.set("stats", Value.fromString(<string>value));
+    }
+  }
+
+  get metadata(): string | null {
+    let value = this.get("metadata");
+    if (!value || value.kind == ValueKind.NULL) {
+      return null;
+    } else {
+      return value.toString();
+    }
+  }
+
+  set metadata(value: string | null) {
+    if (!value) {
+      this.unset("metadata");
+    } else {
+      this.set("metadata", Value.fromString(<string>value));
     }
   }
 }
@@ -2640,85 +2901,6 @@ export class Comment extends Entity {
     this.set("profilePointed", Value.fromString(value));
   }
 
-  get stats(): string {
-    let value = this.get("stats");
-    return value!.toString();
-  }
-
-  set stats(value: string) {
-    this.set("stats", Value.fromString(value));
-  }
-
-  get metadata(): string {
-    let value = this.get("metadata");
-    return value!.toString();
-  }
-
-  set metadata(value: string) {
-    this.set("metadata", Value.fromString(value));
-  }
-
-  get firstComment(): string | null {
-    let value = this.get("firstComment");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set firstComment(value: string | null) {
-    if (!value) {
-      this.unset("firstComment");
-    } else {
-      this.set("firstComment", Value.fromString(<string>value));
-    }
-  }
-
-  get appId(): string {
-    let value = this.get("appId");
-    return value!.toString();
-  }
-
-  set appId(value: string) {
-    this.set("appId", Value.fromString(value));
-  }
-
-  get hidden(): boolean {
-    let value = this.get("hidden");
-    return value!.toBoolean();
-  }
-
-  set hidden(value: boolean) {
-    this.set("hidden", Value.fromBoolean(value));
-  }
-
-  get collectNftAddress(): string {
-    let value = this.get("collectNftAddress");
-    return value!.toString();
-  }
-
-  set collectNftAddress(value: string) {
-    this.set("collectNftAddress", Value.fromString(value));
-  }
-
-  get reaction(): string | null {
-    let value = this.get("reaction");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set reaction(value: string | null) {
-    if (!value) {
-      this.unset("reaction");
-    } else {
-      this.set("reaction", Value.fromString(<string>value));
-    }
-  }
-
   get collectedBy(): string | null {
     let value = this.get("collectedBy");
     if (!value || value.kind == ValueKind.NULL) {
@@ -2734,15 +2916,6 @@ export class Comment extends Entity {
     } else {
       this.set("collectedBy", Value.fromString(<string>value));
     }
-  }
-
-  get hasCollectedByMe(): boolean {
-    let value = this.get("hasCollectedByMe");
-    return value!.toBoolean();
-  }
-
-  set hasCollectedByMe(value: boolean) {
-    this.set("hasCollectedByMe", Value.fromBoolean(value));
   }
 }
 
