@@ -2609,21 +2609,13 @@ export class Post extends Entity {
     }
   }
 
-  get mirrors(): Array<string> | null {
+  get mirrors(): Array<string> {
     let value = this.get("mirrors");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toStringArray();
-    }
+    return value!.toStringArray();
   }
 
-  set mirrors(value: Array<string> | null) {
-    if (!value) {
-      this.unset("mirrors");
-    } else {
-      this.set("mirrors", Value.fromStringArray(<Array<string>>value));
-    }
+  set mirrors(value: Array<string>) {
+    this.set("mirrors", Value.fromStringArray(value));
   }
 
   get appId(): string | null {

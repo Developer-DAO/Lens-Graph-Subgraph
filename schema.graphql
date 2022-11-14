@@ -323,7 +323,7 @@ type Post @entity {
 	# Address of user who collected
 	collectedBy: String
 
-	mirrors: [ID!]
+	mirrors: [ID!]!
 
 	# Additional fields that we want to remove
 	# TODO: Refactor & remove
