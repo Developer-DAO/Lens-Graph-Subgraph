@@ -264,13 +264,13 @@ type Profile @entity {
   bio: String
   followNftAddress: String
   metadata: String
-  handle: String!
-  picture: ProfileMedia
+  # handle: String!
+  # picture: ProfileMedia
   coverPicture: ProfileMedia
   ownedBy: String!
   dispatcher: Dispatcher
   stats: ProfileStats
-  followModule: FollowModule
+  # followModule: FollowModule
   isDefault: Boolean
   attributes: [Attribute!]
   isFollowedByMe: Boolean
@@ -323,14 +323,14 @@ type Post @entity {
   # Address of user who collected
   collectedBy: String
 
-  mirrors: [ID!]
+  mirrors: [ID!]!
 
   # Additional fields that we want to remove
   # TODO: Refactor & remove
   appId: String
   hidden: Boolean
   collectNftAddress: String
-  collectedBy: Wallet
+  # collectedBy: Wallet
   reaction: ReactionTypes
   hasCollectedByMe: Boolean
   stats: PublicationStats

@@ -106,7 +106,7 @@ export function handlePostCreated(event: PostCreated): void {
 
   let profile = Profile.load(event.params.profileId.toString());
   if (profile) {
-    profile.posts = (profile.posts ?? []).concat([post.id]);
+    profile.posts = (profile.posts || []).concat([post.id]);
     profile.save();
   }
 }
@@ -129,7 +129,7 @@ export function handleCommentCreated(event: CommentCreated): void {
 
   let profile = Profile.load(event.params.profileId.toString());
   if (profile) {
-    profile.comments = (profile.comments ?? []).concat([comment.id]);
+    profile.comments = (profile.comments || []).concat([comment.id]);
     profile.save();
   }
 }
@@ -152,14 +152,17 @@ export function handleMirrorCreated(event: MirrorCreated): void {
   // Add publication mirrors
   let post = Post.load(event.params.pubIdPointed.toString());
   if (post) {
-    post.mirrors = (post.mirrors ?? []).concat([event.params.pubId.toString()]);
+    const newMirrors = (post.mirrors || []).concat([mirror.id]);
+    post.mirrors = newMirrors;
+    post.save();
   }
 
   let comment = Comment.load(event.params.pubIdPointed.toString());
   if (comment) {
-    comment.mirrors = (comment.mirrors ?? []).concat([
+    comment.mirrors = (comment.mirrors || []).concat([
       event.params.pubId.toString(),
     ]);
+    comment.save();
   }
 }
 
