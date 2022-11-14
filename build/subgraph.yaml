@@ -6,38 +6,8 @@ dataSources:
     name: LensHub
     network: matic
     source:
-      address: "0x20f4D7DdeE23029048C53B42dc73A02De19F1c9E"
-      abi: LensHub
-      startBlock: 30068251
-    mapping:
-      kind: ethereum/events
-      apiVersion: 0.0.5
-      language: wasm/assemblyscript
-      entities:
-        - Approval
-        - ApprovalForAll
-        - Transfer
-        - Profile
-      abis:
-        - name: LensHub
-          file: LensHub/abis/LensHub.json
-      eventHandlers:
-        - event: Approval(indexed address,indexed address,indexed uint256)
-          handler: handleApproval
-        - event: ApprovalForAll(indexed address,indexed address,bool)
-          handler: handleApprovalForAll
-        - event: Transfer(indexed address,indexed address,indexed uint256)
-          handler: handleTransfer
-        - event: ProfileCreated(indexed uint256,indexed address,indexed
-            address,string,string,address,bytes,string,uint256)
-          handler: handleProfileCreated
-      file: LensHub/LensHub.wasm
-  - kind: ethereum
-    name: TransparentUpgradeableProxy
-    network: matic
-    source:
       address: "0xDb46d1Dc155634FbC732f92E853b10B288AD5a1d"
-      abi: TransparentUpgradeableProxy
+      abi: LensHub
       startBlock: 28384641
     mapping:
       kind: ethereum/events
@@ -48,13 +18,21 @@ dataSources:
         - BeaconUpgraded
         - Upgraded
       abis:
-        - name: TransparentUpgradeableProxy
-          file: TransparentUpgradeableProxy/abis/TransparentUpgradeableProxy.json
+        - name: LensHub
+          file: LensHub/abis/LensHub.json
       eventHandlers:
-        - event: AdminChanged(address,address)
-          handler: handleAdminChanged
-        - event: BeaconUpgraded(indexed address)
-          handler: handleBeaconUpgraded
-        - event: Upgraded(indexed address)
-          handler: handleUpgraded
-      file: TransparentUpgradeableProxy/TransparentUpgradeableProxy.wasm
+        - event: ProfileCreated(indexed uint256,indexed address,indexed
+            address,string,string,address,bytes,string,uint256)
+          handler: handleProfileCreated
+        - event: PostCreated(indexed uint256,indexed
+            uint256,string,address,bytes,address,bytes,uint256)
+          handler: handlePostCreated
+        - event: CommentCreated(indexed uint256,indexed
+            uint256,string,uint256,uint256,bytes,address,bytes,address,bytes,uint256)
+          handler: handleCommentCreated
+        - event: MirrorCreated(indexed uint256,indexed
+            uint256,uint256,uint256,bytes,address,bytes,uint256)
+          handler: handleMirrorCreated
+        - event: Collected(indexed address,indexed uint256,indexed uint256,uint256,uint256,uint256)
+          handler: handleCollected
+      file: LensHub/LensHub.wasm
