@@ -2162,32 +2162,6 @@ export class Profile extends Entity {
     }
   }
 
-  get handle(): string {
-    let value = this.get("handle");
-    return value!.toString();
-  }
-
-  set handle(value: string) {
-    this.set("handle", Value.fromString(value));
-  }
-
-  get picture(): string | null {
-    let value = this.get("picture");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set picture(value: string | null) {
-    if (!value) {
-      this.unset("picture");
-    } else {
-      this.set("picture", Value.fromString(<string>value));
-    }
-  }
-
   get coverPicture(): string | null {
     let value = this.get("coverPicture");
     if (!value || value.kind == ValueKind.NULL) {
@@ -2245,23 +2219,6 @@ export class Profile extends Entity {
       this.unset("stats");
     } else {
       this.set("stats", Value.fromString(<string>value));
-    }
-  }
-
-  get followModule(): string | null {
-    let value = this.get("followModule");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set followModule(value: string | null) {
-    if (!value) {
-      this.unset("followModule");
-    } else {
-      this.set("followModule", Value.fromString(<string>value));
     }
   }
 
@@ -2709,23 +2666,6 @@ export class Post extends Entity {
       this.unset("collectNftAddress");
     } else {
       this.set("collectNftAddress", Value.fromString(<string>value));
-    }
-  }
-
-  get collectedBy(): string | null {
-    let value = this.get("collectedBy");
-    if (!value || value.kind == ValueKind.NULL) {
-      return null;
-    } else {
-      return value.toString();
-    }
-  }
-
-  set collectedBy(value: string | null) {
-    if (!value) {
-      this.unset("collectedBy");
-    } else {
-      this.set("collectedBy", Value.fromString(<string>value));
     }
   }
 
