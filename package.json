@@ -10,7 +10,8 @@
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Nazeeh21/Lens-Protocol-Matic"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.30.0",
-    "@graphprotocol/graph-ts": "0.27.0"
+    "@graphprotocol/graph-cli": "0.36.1",
+    "@graphprotocol/graph-ts": "0.29.0",
+    "assemblyscript-regex": "^1.6.4"
   }
 }

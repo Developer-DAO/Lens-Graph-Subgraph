@@ -1,148 +1,148 @@
-type Approval @entity {
-  id: ID!
-  owner: Bytes! # address
-  approved: Bytes! # address
-  tokenId: BigInt! # uint256
-}
+# type Approval @entity {
+#   id: ID!
+#   owner: Bytes! # address
+#   approved: Bytes! # address
+#   tokenId: BigInt! # uint256
+# }
 
-type ApprovalForAll @entity {
-  id: ID!
-  owner: Bytes! # address
-  operator: Bytes! # address
-  approved: Boolean! # bool
-}
+# type ApprovalForAll @entity {
+#   id: ID!
+#   owner: Bytes! # address
+#   operator: Bytes! # address
+#   approved: Boolean! # bool
+# }
 
-type Transfer @entity {
-  id: ID!
-  from: Bytes! # address
-  to: Bytes! # address
-  tokenId: BigInt! # uint256
-}
+# type Transfer @entity {
+#   id: ID!
+#   from: Bytes! # address
+#   to: Bytes! # address
+#   tokenId: BigInt! # uint256
+# }
 
-type Dispatcher @entity {
-  id: ID!
-  address: String!
-  canUseRelay: Boolean!
-}
+# type Dispatcher @entity {
+#   id: ID!
+#   address: String!
+#   canUseRelay: Boolean!
+# }
 
-type ProfileStats @entity {
-  id: ID!
-  totalFollowers: BigInt!
-  totalFollowing: BigInt!
-  totalPosts: BigInt!
-  totalComments: BigInt!
-  totalMirrors: BigInt!
-  totalPublications: BigInt!
-  totalCollects: BigInt!
-}
+# type ProfileStats @entity {
+#   id: ID!
+#   totalFollowers: BigInt!
+#   totalFollowing: BigInt!
+#   totalPosts: BigInt!
+#   totalComments: BigInt!
+#   totalMirrors: BigInt!
+#   totalPublications: BigInt!
+#   totalCollects: BigInt!
+# }
 
-type NftImage @entity {
-  id: ID!
-  contractAddress: String!
-  tokenId: String!
-  url: String!
-  chainId: BigInt!
-  verified: Boolean!
-}
+# type NftImage @entity {
+#   id: ID!
+#   contractAddress: String!
+#   tokenId: String!
+#   url: String!
+#   chainId: BigInt!
+#   verified: Boolean!
+# }
 
-type Media @entity {
-  id: ID!
-  url: String!
-  width: BigInt
-  height: BigInt
-  size: BigInt
-  mimeType: String
-}
+# type Media @entity {
+#   id: ID!
+#   url: String!
+#   width: BigInt
+#   height: BigInt
+#   size: BigInt
+#   mimeType: String
+# }
 
-type MediaSet @entity {
-  id: ID!
-  original: Media!
-  small: Media
-  medium: Media
-}
+# type MediaSet @entity {
+#   id: ID!
+#   original: Media!
+#   small: Media
+#   medium: Media
+# }
 
-enum ProfileMedia {
-  NftImage
-  MediaSet
-}
+# enum ProfileMedia {
+#   NftImage
+#   MediaSet
+# }
 
-type Erc20 @entity {
-  id: ID!
-  name: String!
-  symbol: String!
-  decimals: BigInt!
-  address: String!
-}
+# type Erc20 @entity {
+#   id: ID!
+#   name: String!
+#   symbol: String!
+#   decimals: BigInt!
+#   address: String!
+# }
 
-type ModuleFeeAmount @entity {
-  id: ID!
-  asset: Erc20!
-  vaue: String!
-}
+# type ModuleFeeAmount @entity {
+#   id: ID!
+#   asset: Erc20!
+#   vaue: String!
+# }
 
-type FeeFollowModuleSettings @entity {
-  id: ID!
-  contractAddress: String!
-  amount: ModuleFeeAmount!
-  recipient: String!
-}
+# type FeeFollowModuleSettings @entity {
+#   id: ID!
+#   contractAddress: String!
+#   amount: ModuleFeeAmount!
+#   recipient: String!
+# }
 
-type ProfileFollowModuleSettings @entity {
-  id: ID!
-  contractAddress: String!
-}
+# type ProfileFollowModuleSettings @entity {
+#   id: ID!
+#   contractAddress: String!
+# }
 
-type RevertFollowModuleSettings @entity {
-  id: ID!
-  contractAddress: String!
-}
+# type RevertFollowModuleSettings @entity {
+#   id: ID!
+#   contractAddress: String!
+# }
 
-enum FollowModule {
-  FeeFollowModuleSettings
-  ProfileFollowModuleSettings
-  RevertFollowModuleSettings
-}
+# # enum FollowModule {
+# #   FeeFollowModuleSettings
+# #   ProfileFollowModuleSettings
+# #   RevertFollowModuleSettings
+# # }
 
-type Attribute @entity {
-  id: ID!
-  displayType: String
-  traitType: String
-  key: String!
-  value: String!
-}
+# type Attribute @entity {
+#   id: ID!
+#   displayType: String
+#   traitType: String
+#   key: String!
+#   value: String!
+# }
 
-enum ReactionTypes {
-  UPVOTE
-  DOWNVOTE
-}
+# enum ReactionTypes {
+#   UPVOTE
+#   DOWNVOTE
+# }
 
-type PublicationStats @entity {
-  id: ID!
-  totalAmountOfMirrors: BigInt!
-  totalAmountOfCollects: BigInt!
-  totalAmountOfComments: BigInt!
-  totalUpvotes: BigInt!
-  totalDownvotes: BigInt!
-}
+# type PublicationStats @entity {
+#   id: ID!
+#   totalAmountOfMirrors: BigInt!
+#   totalAmountOfCollects: BigInt!
+#   totalAmountOfComments: BigInt!
+#   totalUpvotes: BigInt!
+#   totalDownvotes: BigInt!
+# }
 
-type Wallet @entity {
-  id: ID!
-  address: String!
-  defaulProfile: Profile!
-}
+# type Wallet @entity {
+#   id: ID!
+#   address: String!
+#   defaulProfile: Profile!
+# }
 
-enum MetadataDisplayType {
-  BigInt
-  String
-  String
-}
+# enum MetadataDisplayType {
+#   BigInt
+#   String
+#   String
+# }
 
-type MetadataAttributeOutput @entity {
-  id: ID!
-  displayType: MetadataDisplayType
-  traitType: String
-  value: String
-}
+# type MetadataAttributeOutput @entity {
+#   id: ID!
+#   displayType: MetadataDisplayType
+#   traitType: String
+#   value: String
+# }
 
 type MetadataOutput @entity {
   id: ID!
@@ -150,280 +150,280 @@ type MetadataOutput @entity {
   description: String
   content: String
   image: String
-  cover: MediaSet
-  media: [MediaSet!]!
-  attributes: [MetadataAttributeOutput!]!
+  # cover: MediaSet
+  # media: [MediaSet!]!
+  # attributes: [MetadataAttributeOutput!]!
 }
 
-type ReactionFieldResolverRequest @entity {
-  id: ID!
-  profileId: BigInt
-}
+# type ReactionFieldResolverRequest @entity {
+#   id: ID!
+#   profileId: BigInt
+# }
 
-enum CollectModule {
-  LimitedFeeCollectModule
-  FeeCollectModule
-  LimitedTimedFeeCollectModule
-  TimedFeeCollectModule
-  RevertCollectModule
-  FreeCollectModule
-}
+# enum CollectModule {
+#   LimitedFeeCollectModule
+#   FeeCollectModule
+#   LimitedTimedFeeCollectModule
+#   TimedFeeCollectModule
+#   RevertCollectModule
+#   FreeCollectModule
+# }
 
-type FreeCollectModuleSettings @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-  followerOnly: Boolean!
-}
+# type FreeCollectModuleSettings @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+#   followerOnly: Boolean!
+# }
 
-type FeeCollectModuleSettings @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-  amount: ModuleFeeAmount!
-  recipient: String!
-  referralFee: BigDecimal!
-  followerOnly: Boolean!
-}
+# type FeeCollectModuleSettings @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+#   amount: ModuleFeeAmount!
+#   recipient: String!
+#   referralFee: BigDecimal!
+#   followerOnly: Boolean!
+# }
 
-type LimitedFeeCollectModule @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-  collectLimit: String!
-  amount: ModuleFeeAmount!
-  recipient: String!
-  referralFee: BigDecimal!
-  followerOnly: Boolean!
-}
+# type LimitedFeeCollectModule @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+#   collectLimit: String!
+#   amount: ModuleFeeAmount!
+#   recipient: String!
+#   referralFee: BigDecimal!
+#   followerOnly: Boolean!
+# }
 
-type LimitedTimedFeeCollectModuleSettings @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-  collectLimit: String!
-  amount: ModuleFeeAmount!
-  recipient: String!
-  referralFee: BigDecimal!
-  followerOnly: Boolean!
-  endTimestamp: String!
-}
+# type LimitedTimedFeeCollectModuleSettings @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+#   collectLimit: String!
+#   amount: ModuleFeeAmount!
+#   recipient: String!
+#   referralFee: BigDecimal!
+#   followerOnly: Boolean!
+#   endTimestamp: String!
+# }
 
-type RevertCollectModuleSettings @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-}
+# type RevertCollectModuleSettings @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+# }
 
-type TimedFeeCollectModuleSettings @entity {
-  id: ID!
-  type: CollectModule!
-  contractAddress: String!
-  amount: ModuleFeeAmount!
-  recipient: String!
-  referralFee: BigDecimal!
-  followerOnly: Boolean!
-  endTimestamp: String!
-}
+# type TimedFeeCollectModuleSettings @entity {
+#   id: ID!
+#   type: CollectModule!
+#   contractAddress: String!
+#   amount: ModuleFeeAmount!
+#   recipient: String!
+#   referralFee: BigDecimal!
+#   followerOnly: Boolean!
+#   endTimestamp: String!
+# }
 
-enum ReferenceModule {
-  FollowOnlyReferenceModule
-}
+# enum ReferenceModule {
+#   FollowOnlyReferenceModule
+# }
 
-type FollowOnlyReferenceModuleSettings @entity {
-  id: ID!
-  type: ReferenceModule!
-  contractAddress: String!
-}
+# type FollowOnlyReferenceModuleSettings @entity {
+#   id: ID!
+#   type: ReferenceModule!
+#   contractAddress: String!
+# }
 
-# https://docs.lens.xyz/docs/events#profilecreated
-type Profile @entity {
-  id: ID!
+# # https://docs.lens.xyz/docs/events#profilecreated
+# type Profile @entity {
+#   id: ID!
 
-  createdAt: String!
+#   createdAt: String!
 
-  # Wallet address
-  creator: String!
-  mintedTo: String!
-  handle: String!
-  picture: ProfileMedia
+#   # Wallet address
+#   creator: String!
+#   mintedTo: String!
+#   handle: String!
+#   picture: ProfileMedia
 
-  followModule: FollowModule
-  followModuleReturnData: Bytes
+#   followModule: String
+#   followModuleReturnData: Bytes
 
-  followNftUri: String
+#   followNftUri: String
 
-  # TODO: Combine to single superclass "Publication"
-  posts: [Post!]!
-  comments: [Comment!]!
-  mirrors: [Mirror!]!
+#   # TODO: Combine to single superclass "Publication"
+#   # posts: [Post!]! @derivedFrom(field: "profile")
+#   # comments: [Comment!]! @derivedFrom(field: "profile")
+#   # mirrors: [Mirror!]! @derivedFrom(field: "profile")
 
-  # Additional fields that we want to remove
-  # TODO: Refactor & remove
-  name: String
-  bio: String
-  followNftAddress: String
-  metadata: String
-  # handle: String!
-  # picture: ProfileMedia
-  coverPicture: ProfileMedia
-  ownedBy: String!
-  dispatcher: Dispatcher
-  stats: ProfileStats
-  # followModule: FollowModule
-  isDefault: Boolean
-  attributes: [Attribute!]
-  isFollowedByMe: Boolean
-  isFollowingMe: Boolean
-}
+#   # Additional fields that we want to remove
+#   # TODO: Refactor & remove
+#   name: String
+#   bio: String
+#   followNftAddress: String
+#   metadata: String
+#   # handle: String!
+#   # picture: ProfileMedia
+#   coverPicture: ProfileMedia
+#   ownedBy: String!
+#   dispatcher: Dispatcher
+#   stats: ProfileStats
+#   # followModule: FollowModule
+#   isDefault: Boolean
+#   attributes: [Attribute!]
+#   isFollowedByMe: Boolean
+#   isFollowingMe: Boolean
+# }
 
-# Mirrors should extend "Post"
-# https://docs.lens.xyz/docs/mirror
-type Mirror @entity {
-  id: ID!
-  profile: Profile!
-  createdAt: String!
+# # Mirrors should extend "Post"
+# # https://docs.lens.xyz/docs/mirror
+# type Mirror @entity {
+#   id: ID!
+#   profile: Profile!
+#   createdAt: String!
 
-  referenceModule: ReferenceModule!
-  referenceModuleReturnData: Bytes!
+#   referenceModule: ReferenceModule!
+#   referenceModuleReturnData: Bytes!
 
-  profilePointed: Profile!
-  publicationPointed: Post!
+#   profilePointed: Profile!
+#   publicationPointed: Post!
 
-  # Address of user who collected
-  collectedBy: String
+#   # Address of user who collected
+#   collectedBy: String
 
-  # Additional fields that we want to remove
-  # TODO: Refactor & remove
-  stats: PublicationStats!
-  metadata: MetadataOutput!
-  onChainContentURI: String!
-  appId: BigInt
-  hidden: Boolean!
-  collectNftAddress: String
-  reaction: ReactionTypes
-  hasCollectedByMe: Boolean!
-}
+#   # Additional fields that we want to remove
+#   # TODO: Refactor & remove
+#   stats: PublicationStats!
+#   metadata: MetadataOutput!
+#   onChainContentURI: String!
+#   appId: BigInt
+#   hidden: Boolean!
+#   collectNftAddress: String
+#   reaction: ReactionTypes
+#   hasCollectedByMe: Boolean!
+# }
 
 type Post @entity {
   id: ID!
-  profile: Profile!
+  profile: String!
 
   onChainContentURI: String!
 
-  # Address
-  collectModule: CollectModule
-  collectModuleReturnData: Bytes
+  # # Address
+  # collectModule: CollectModule
+  # collectModuleReturnData: Bytes
 
-  referenceModule: ReferenceModule
-  referenceModuleReturnData: Bytes
+  # referenceModule: ReferenceModule
+  # referenceModuleReturnData: Bytes
 
   createdAt: String!
 
   # Address of user who collected
   collectedBy: String
 
-  mirrors: [ID!]!
+  # mirrors: [Mirror!]! @derivedFrom(field: "publicationPointed")
 
-  # Additional fields that we want to remove
-  # TODO: Refactor & remove
-  appId: String
-  hidden: Boolean
-  collectNftAddress: String
-  # collectedBy: Wallet
-  reaction: ReactionTypes
-  hasCollectedByMe: Boolean
-  stats: PublicationStats
+  # # Additional fields that we want to remove
+  # # TODO: Refactor & remove
+  # appId: String
+  # hidden: Boolean
+  # collectNftAddress: String
+  # # collectedBy: Wallet
+  # reaction: ReactionTypes
+  # hasCollectedByMe: Boolean
+  # stats: PublicationStats
   metadata: MetadataOutput
 }
 
-# TODO: We need to make "Comment" extend from "Publication"
-type Comment @entity {
-  id: ID!
-  profile: Profile!
-  onChainContentURI: String!
-  createdAt: String!
-  mirrors: [ID!]!
+# # TODO: We need to make "Comment" extend from "Publication"
+# type Comment @entity {
+#   id: ID!
+#   profile: Profile!
+#   onChainContentURI: String!
+#   createdAt: String!
+#   mirrors: [ID!]!
 
-  # Publication that comment points to
-  publication: Post!
-  # Reference module settings for this comment
-  referenceModule: ReferenceModule
-  # Collect module settings for this comment
-  collectModule: CollectModule!
-  # Profile that comment points to (may be different than comment author)
-  profilePointed: Profile!
+#   # Publication that comment points to
+#   publication: Post!
+#   # Reference module settings for this comment
+#   referenceModule: ReferenceModule
+#   # Collect module settings for this comment
+#   collectModule: CollectModule!
+#   # Profile that comment points to (may be different than comment author)
+#   profilePointed: Profile!
 
-  # Address of user who collected
-  collectedBy: String
-}
+#   # Address of user who collected
+#   collectedBy: String
+# }
 
-type Owner @entity {
-  id: ID!
-  amount: BigDecimal!
-  address: String!
-}
+# type Owner @entity {
+#   id: ID!
+#   amount: BigDecimal!
+#   address: String!
+# }
 
-type NFTContent @entity {
-  id: ID!
-  uri: String!
-  metaType: String!
-  animatedUrl: String
-}
+# type NFTContent @entity {
+#   id: ID!
+#   uri: String!
+#   metaType: String!
+#   animatedUrl: String
+# }
 
-type NFT @entity {
-  id: ID!
-  contractName: String!
-  contractAddress: String!
-  symbol: String!
-  tokenId: String!
-  owners: [Owner!]!
-  name: String!
-  description: String!
-  contentURI: String!
-  originalContent: NFTContent!
-  chainId: ID!
-  collectionName: String!
-  ercType: String!
-}
+# type NFT @entity {
+#   id: ID!
+#   contractName: String!
+#   contractAddress: String!
+#   symbol: String!
+#   tokenId: String!
+#   owners: [Owner!]!
+#   name: String!
+#   description: String!
+#   contentURI: String!
+#   originalContent: NFTContent!
+#   chainId: ID!
+#   collectionName: String!
+#   ercType: String!
+# }
 
-# Handles
-#12
+# # Handles
+# #12
 
-# Retrieved from https://graphiql-online.com/voyager-view
-type ReservedClaimableHandle @entity {
-  id: ID!
-  # Requires custom "Handle" scalar type
-  handle: String!
-  source: String!
-  expiry: String!
-}
+# # Retrieved from https://graphiql-online.com/voyager-view
+# type ReservedClaimableHandle @entity {
+#   id: ID!
+#   # Requires custom "Handle" scalar type
+#   handle: String!
+#   source: String!
+#   expiry: String!
+# }
 
-type ClaimableHandles @entity {
-  id: ID!
-  canClaimFreeTextHandle: Boolean!
-  claimableHandles: [ReservedClaimableHandle!]!
-}
+# type ClaimableHandles @entity {
+#   id: ID!
+#   canClaimFreeTextHandle: Boolean!
+#   claimableHandles: [ReservedClaimableHandle!]!
+# }
 
-# Address
-#13
+# # Address
+# #13
 
-type TransactionReceipt @entity {
-  id: ID!
-  to: String!
-  from: String!
-  contractAddress: String
-  transactionIndex: Int!
-  root: String
-  gasUsed: String!
-  logsBloom: String!
-  blockHash: String!
-  transactionHash: String!
-  blockNumber: Int!
-  confirmations: Int!
-  cumulativeGasUsed: String!
-  effectiveGasPrice: String!
-  byzantium: Boolean!
-  type: Int!
-  status: Int
-}
+# type TransactionReceipt @entity {
+#   id: ID!
+#   to: String!
+#   from: String!
+#   contractAddress: String
+#   transactionIndex: Int!
+#   root: String
+#   gasUsed: String!
+#   logsBloom: String!
+#   blockHash: String!
+#   transactionHash: String!
+#   blockNumber: Int!
+#   confirmations: Int!
+#   cumulativeGasUsed: String!
+#   effectiveGasPrice: String!
+#   byzantium: Boolean!
+#   type: Int!
+#   status: Int
+# }

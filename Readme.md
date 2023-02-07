@@ -78,3 +78,21 @@ This subgraph has three types of files which tell the Graph Node to ingest event
   This repository has these files created and ready to compile, so a user can start this subgraph on their own. The only thing that needs to be edited is the contract addresses in the subgraph.yaml file to change between Kovan, Ropsten or Mainnet.
 
 We have provided a quick guide on how to start up the Lens-Protocol-Subgraph graph node. If these steps aren't descriptive enough, the [getting started guide](https://github.com/graphprotocol/graph-node/blob/master/docs/getting-started.md) has in depth details on running a subgraph.
+
+# Example Metadata
+
+```json
+{
+  "name": "post by Jeremy",
+  "description": "Coinbase's Q2 2022 compared to Q2 last year:\n\nRevenues down 60% from last year\nOperating expenses up 37%\nMonthly users up 2%\nhttps://twitter.com/JackFarley96/status/1557110166264455168/photo/1",
+  "content": "Coinbase's Q2 2022 compared to Q2 last year:\n\nRevenues down 60% from last year\nOperating expenses up 37%\nMonthly users up 2%\nhttps://twitter.com/JackFarley96/status/1557110166264455168/photo/1",
+  "external_url": null,
+  "image": null,
+  "imageMimeType": null,
+  "version": "1.0.0",
+  "appId": "iris",
+  "attributes": [],
+  "media": [],
+  "metadata_id": "6d35b871-070b-4f49-ae55-803c203d5681"
+}
+```

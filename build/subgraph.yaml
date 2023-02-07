@@ -1,4 +1,5 @@
 specVersion: 0.0.5
+description: asdf
 schema:
   file: schema.graphql
 dataSources:
@@ -11,7 +12,7 @@ dataSources:
       startBlock: 28384641
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.5
+      apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
         - AdminChanged
@@ -21,18 +22,20 @@ dataSources:
         - name: LensHub
           file: LensHub/abis/LensHub.json
       eventHandlers:
-        - event: ProfileCreated(indexed uint256,indexed address,indexed
-            address,string,string,address,bytes,string,uint256)
-          handler: handleProfileCreated
         - event: PostCreated(indexed uint256,indexed
             uint256,string,address,bytes,address,bytes,uint256)
           handler: handlePostCreated
-        - event: CommentCreated(indexed uint256,indexed
-            uint256,string,uint256,uint256,bytes,address,bytes,address,bytes,uint256)
-          handler: handleCommentCreated
-        - event: MirrorCreated(indexed uint256,indexed
-            uint256,uint256,uint256,bytes,address,bytes,uint256)
-          handler: handleMirrorCreated
-        - event: Collected(indexed address,indexed uint256,indexed uint256,uint256,uint256,uint256)
-          handler: handleCollected
       file: LensHub/LensHub.wasm
+templates:
+  - name: MetadataTemplate
+    kind: file/ipfs
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: templates/MetadataTemplate/MetadataTemplate.wasm
+      handler: handleMetadata
+      entities:
+        - MetadataOutput
+      abis:
+        - name: Token
+          file: MetadataTemplate/abis/LensHub.json
